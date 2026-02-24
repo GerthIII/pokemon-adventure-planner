@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :team_members, only: [:create]
   end
 
-  resources :team_members, only: [:delete]
+  resources :team_members, only: [:destroy]
 
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
