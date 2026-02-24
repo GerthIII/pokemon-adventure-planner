@@ -23,12 +23,12 @@ pokemons = [
 ]
 
 pokemons.each do |poke|
-  Pokemon.create!(name:poke)
+  Pokemon.create!(name:poke, type_1: "fire", game_version: "Red")
 end
 
 user = User.create!(email:"ash@gmail.com", password:"123123")
 
 pokemon = Pokemon.last
 playthrough = Playthrough.create!(user: user, game_version: "Red")
-team = Team.create!(name:"Kenji", playthrough: playthrough)
+team = Team.create!(name:"Kenji", id:1, playthrough: playthrough)
 member = TeamMember.create!(team: team, pokemon: pokemon)
