@@ -1,2 +1,11 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1 class="title">HOME PAGE</h1>
+<p class="context">We can make your trip special with your pokemon</p>
+<div class="pokeball"></div>
+<% if user_signed_in? %>
+  <%= button_to "Log out", destroy_user_session_path, method: :delete, class:"pokemon-btn" %>
+<% else %>
+  <%= link_to "log In", new_user_session_path, class: "pokemon-btn" %>
+
+  <%= link_to "Sign In", new_user_registration_path,class: "pokemon-btn" %>
+<%= image_tag "animation.gif", alt: psyduck %>
+<% end %>

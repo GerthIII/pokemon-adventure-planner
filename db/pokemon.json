@@ -1,0 +1,7 @@
+pokemon_filepath = "./pokemon.json"
+serialized_data = File.read(pokemon_filepath)
+pokemons_arr = JSON.parse(serialized_data)["data"]
+
+pokemons_arr.each do |pokemon|
+  # TODO: create pokemon instance
+end

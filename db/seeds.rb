@@ -23,7 +23,7 @@ pokemons = [
 ]
 
 pokemons.each do |poke|
-  Pokemon.create!(name:poke)
+  Pokemon.create!(name:poke, game_version:"Red", type_1:"Wa")
 end
 
 user = User.create!(email:"ash@gmail.com", password:"123123")
