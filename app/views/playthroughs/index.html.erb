@@ -1,0 +1,22 @@
+<h1>My Playthroughs</h1>
+
+<%= link_to "New Playthrough", new_playthrough_path %>
+
+<div class="container">
+  <div class="header">
+    <h1>My Playthroughs</h1>
+    <%= link_to "＋ New", new_playthrough_path, class: "btn-new" %>
+  </div>
+
+  <% if @playthroughs.any? %>
+    <div class="cards">
+      <% @playthroughs.each do |playthrough| %>
+        <%= link_to playthrough_path(playthrough), class: "card" do %>
+          <h3><%= playthrough.game_version.capitalize %></h3>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="empty">No playthroughs found.</p>
+  <% end %>
+</div>

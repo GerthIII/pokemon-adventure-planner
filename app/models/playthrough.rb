@@ -1,6 +1,12 @@
 class Playthrough < ApplicationRecord
   belongs_to :user
-  has_many :teams
+  has_many :teams, dependent: :destroy
 
-  validates :game_version, presence: true
+  GAME_VERSIONS = [
+    "red",
+    "blue",
+    ...
+  ]
+
+  validates :game_version, inclusion: { in: GAME_VERSIONS }
 end

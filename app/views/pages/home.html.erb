@@ -1,2 +1,26 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="home-container">
+
+  <h1 class="app-title">APP NAME</h1>
+
+  <p class="app-description">
+    Text about the app: doajda hfaodid oihdoajsja
+    hashodajdoi oajdoisj hdfdsif oisjoajd oifodshfsh
+    jodahsiu ajadhaksh jdkhdadkjskjd
+  </p>
+
+<%= image_tag "pokeball.png", class: "pokeball-img" %>
+
+<%= link_to new_playthrough_path, class: "start-button" do %>
+  START BUILDING<br>YOUR TEAM
+<% end %>
+
+  <div class="cards-container">
+    <% 3.times do %>
+      <div class="playthrough-card">
+        <%= image_tag "firered.png", class: "game-image" %>
+        <p class="card-title">Playthrough 1</p>
+      </div>
+    <% end %>
+  </div>
+
+</div>

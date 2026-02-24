@@ -1,12 +1,8 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# db/seeds.rb
+
+require "json"
+
+puts "Cleaning database..."
 
 TeamMember.destroy_all
 Team.destroy_all
@@ -14,21 +10,45 @@ Playthrough.destroy_all
 Pokemon.destroy_all
 User.destroy_all
 
-pokemons = [
-  "Pikachu",
-  "Mew",
-  "Porygon",
-  "Kakuna",
-  "Starmie"
-]
+puts "Creating user..."
+user = User.create!(
+  email: "ash@gmail.com",
+  password: "123123"
+)
 
-pokemons.each do |poke|
-  Pokemon.create!(name:poke)
+puts "Loading pokemons from JSON..."
+
+pokemon_filepath = Rails.root.join("db/pokemon.json")
+serialized_data = File.read(pokemon_filepath)
+pokemons_arr = JSON.parse(serialized_data)["data"]
+
+pokemons_arr.each do |pokemon|
+  Pokemon.create!(
+    name: pokemon["name"],
+    pokedex_id: pokemon["id"],
+    sprite_url: pokemon["sprites"]["front_default"]
+  )
 end
 
-user = User.create!(email:"ash@gmail.com", password:"123123")
+puts "Creating playthrough..."
 
-pokemon = Pokemon.last
-playthrough = Playthrough.create!(user: user, game_version: "Red")
-team = Team.create!(name:"Kenji", playthrough: playthrough)
-member = TeamMember.create!(team: team, pokemon: pokemon)
+playthrough = Playthrough.create!(
+  user: user,
+  game_version: "red" # ← 小文字にすること！！
+)
+
+puts "Creating team..."
+
+team = Team.create!(
+  name: "Team Rocket",
+  playthrough: playthrough
+)
+
+puts "Adding first pokemon to team..."
+
+TeamMember.create!(
+  team: team,
+  pokemon: Pokemon.first
+)
+
+puts "Seeding done!"
