@@ -14,29 +14,34 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_23_082204) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
-  create_table "availabilities", force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
     t.datetime "created_at", null: false
-    t.bigint "game_id", null: false
-    t.bigint "pokemon_id", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_availabilities_on_game_id"
-    t.index ["pokemon_id"], name: "index_availabilities_on_pokemon_id"
-  end
-
-  create_table "chats", force: :cascade do |t|
-    t.datetime "created_at", null: false
+    t.string "role"
     t.bigint "team_id", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "index_chats_on_team_id"
+    t.index ["team_id"], name: "index_messages_on_team_id"
   end
 
-  create_table "games", force: :cascade do |t|
+  create_table "playthroughs", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "game_version"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_playthroughs_on_user_id"
+  end
+
+  create_table "pokemons", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "game_version"
+    t.string "image_url"
     t.text "name"
+    t.string "type_1"
+    t.string "type_2"
     t.datetime "updated_at", null: false
   end
 
-  create_table "members", force: :cascade do |t|
+  create_table "team_members", force: :cascade do |t|
     t.string "ability"
     t.datetime "created_at", null: false
     t.string "held_item"
@@ -48,34 +53,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_23_082204) do
     t.bigint "pokemon_id", null: false
     t.bigint "team_id", null: false
     t.datetime "updated_at", null: false
-    t.index ["pokemon_id"], name: "index_members_on_pokemon_id"
-    t.index ["team_id"], name: "index_members_on_team_id"
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.bigint "chat_id", null: false
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.string "role"
-    t.datetime "updated_at", null: false
-    t.index ["chat_id"], name: "index_messages_on_chat_id"
-  end
-
-  create_table "playthroughs", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.bigint "game_id", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["game_id"], name: "index_playthroughs_on_game_id"
-    t.index ["user_id"], name: "index_playthroughs_on_user_id"
-  end
-
-  create_table "pokemons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.text "name"
-    t.string "type_1"
-    t.string "type_2"
-    t.datetime "updated_at", null: false
+    t.index ["pokemon_id"], name: "index_team_members_on_pokemon_id"
+    t.index ["team_id"], name: "index_team_members_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -98,13 +77,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_23_082204) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "availabilities", "games"
-  add_foreign_key "availabilities", "pokemons"
-  add_foreign_key "chats", "teams"
-  add_foreign_key "members", "pokemons"
-  add_foreign_key "members", "teams"
-  add_foreign_key "messages", "chats"
-  add_foreign_key "playthroughs", "games"
+  add_foreign_key "messages", "teams"
   add_foreign_key "playthroughs", "users"
+  add_foreign_key "team_members", "pokemons"
+  add_foreign_key "team_members", "teams"
   add_foreign_key "teams", "playthroughs"
 end

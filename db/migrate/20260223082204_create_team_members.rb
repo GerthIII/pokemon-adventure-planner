@@ -1,6 +1,6 @@
-class CreateMembers < ActiveRecord::Migration[8.1]
+class CreateTeamMembers < ActiveRecord::Migration[8.1]
   def change
-    create_table :members do |t|
+    create_table :team_members do |t|
       t.string :ability
       t.string :nature
       t.string :held_item

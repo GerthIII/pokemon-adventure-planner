@@ -1,4 +1,6 @@
 class Playthrough < ApplicationRecord
   belongs_to :user
-  belongs_to :game
+  has_many :teams
+
+  validates :game_version, presence: true
 end
