@@ -8,6 +8,20 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
   end
 
+  # def new
+  #   @team = Team.new
+  # end
+
+  # def create
+  #   @team = Team.new(team_params)
+  #   if @team.save
+  #     puts "saved"
+  #     redirect_to team_path(@chat)
+  #   else
+  #     puts "did not save"
+  #   end
+  # end
+
   def edit
     @team = Team.includes(:team_members).find(params[:id])
     game_version = @team.playthrough.game_version

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="container mt-5">
   <h1>Playthrough: <%= @playthrough.game_version.capitalize %></h1>
   <hr class="border-light">
@@ -22,25 +21,3 @@
     <%= link_to "Create New Team", new_playthrough_team_path(@playthrough), class: "btn btn-info fw-bold rounded-pill" %>
   </div>
 </div>
-=======
-<h1><%= @team.name %></h1>
-<!--replace with team name-->
-<div class="party d-flex justify-content-between">
-  <% @team.team_members.each do |member| %>
-    <div class="pokemon1">
-      <h3><%= member.pokemon.name %></h3>
-      <p>Ability: <%= member.ability %></p>
-      <p>Nature: <%= member.nature %></p>
-      <p>Item: <%= member.held_item %></p>
-      <h3>Move Set</h3>
-      <ul>
-        <li><%= member.move_1 %></li>
-        <li><%= member.move_2 %></li>
-        <li><%= member.move_3 %></li>
-        <li><%= member.move_4 %></li>
-      </ul>
-    </div>
-  <% end %>
-</div>
-<%= link_to "Edit Team", edit_team_path(@team), class: "btn btn-info fw-bold px-4 rounded-pill shadow" %>
->>>>>>> master
