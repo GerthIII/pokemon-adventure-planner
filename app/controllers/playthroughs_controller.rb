@@ -4,8 +4,8 @@ class PlaythroughsController < ApplicationController
   end
 
   def show
-    @playthrough = current_user.playthroughs.find(params[:id])
-    @team = @playthrough.team
+    @playthrough = Playthrough.find(params[:id])
+    @team = @playthrough.teams.last
   end
 
   def new
@@ -13,25 +13,12 @@ class PlaythroughsController < ApplicationController
   end
 
   def create
-    @playthrough = current_user.playthroughs.build(playthrough_params)
+    @playthrough = Playthrough.new(playthrough_params)
+    @playthrough.user = current_user
 
     if @playthrough.save
-      # ① starter取得
-      starter_id = params[:starter_pokemon_id]
-
-      # ② team作成（name必須！！）
-      team = Team.create(
-        playthrough: @playthrough,
-        name: "#{@playthrough.game_version} Team"
-      )
-
-      # ③ starterをteam_membersに追加
-      TeamMember.create(
-        team: team,
-        pokemon_id: starter_id
-      )
-
-      redirect_to playthrough_path(@playthrough)
+      redirect_to new_playthrough_team_path(playthrough_id: @playthrough.id),
+                  notice: "Playthrough created! Now, choose your starter."
     else
       render :new
     end

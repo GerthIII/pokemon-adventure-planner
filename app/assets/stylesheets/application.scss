@@ -10,7 +10,7 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-
+@import "components/card";
 
 body {
   background-color: #d9d9d9;
@@ -72,4 +72,19 @@ body {
 .card-title {
   margin-top: 12px;
   font-size: 18px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin: 40px 0;
+}
+
+.card img {
+  width: 140px;
+}
+
+.card {
+  text-align: center;
 }

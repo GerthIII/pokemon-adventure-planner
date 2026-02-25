@@ -1,54 +1,37 @@
-# db/seeds.rb
-
-require "json"
-
-puts "Cleaning database..."
+pokemon_filepath = "db/pokemon.json"
+serialized_data = File.read(pokemon_filepath)
+pokemons_arr = JSON.parse(serialized_data)["data"]
 
 TeamMember.destroy_all
+Message.destroy_all
 Team.destroy_all
 Playthrough.destroy_all
 Pokemon.destroy_all
 User.destroy_all
+# Cria todos os Pokémon do JSON
 
-puts "Creating user..."
-user = User.create!(
-  email: "ash@gmail.com",
-  password: "123123"
-)
-
-puts "Loading pokemons from JSON..."
-
-pokemon_filepath = Rails.root.join("db/pokemon.json")
-serialized_data = File.read(pokemon_filepath)
-pokemons_arr = JSON.parse(serialized_data)["data"]
-
-pokemons_arr.each do |pokemon|
-  Pokemon.create!(
-    name: pokemon["name"],
-    pokedex_id: pokemon["id"],
-    sprite_url: pokemon["sprites"]["front_default"]
-  )
+current_game = pokemons_arr.select do |poke|
+  ["firered", "leafgreen"].include?(poke["game_version"])
 end
 
-puts "Creating playthrough..."
+current_game.each do |poke|
+  Pokemon.create!(
+    name: poke["name"],
+    type_1: poke["types"]&.first || "unknown",
+    type_2: poke["types"]&.second,
+    game_version: poke["game_version"] )
+  end
 
-playthrough = Playthrough.create!(
-  user: user,
-  game_version: "red" # ← 小文字にすること！！
-)
+  user = User.create!(email: "ash@gmail.com", password: "123123")
+  playthrough = Playthrough.create!(user: user, game_version: "firered")
+  team = Team.create!(name: "Kenji", playthrough: playthrough)
+  random_pokemons = Pokemon.all.sample(6)
 
-puts "Creating team..."
+  random_pokemons.each do |pokemon|
+    TeamMember.create!(team: team, pokemon: pokemon)
+  end
 
-team = Team.create!(
-  name: "Team Rocket",
-  playthrough: playthrough
-)
-
-puts "Adding first pokemon to team..."
-
-TeamMember.create!(
-  team: team,
-  pokemon: Pokemon.first
-)
-
-puts "Seeding done!"
+  puts "#{Pokemon.count} Pokemon created"
+  puts "#{Playthrough.count} Playthrough created"
+  puts "#{Team.count} Team created"
+  puts "#{User.count} User created"

@@ -1,22 +1,21 @@
-<h1>My Playthroughs</h1>
+<div class="home-container">
 
-<%= link_to "New Playthrough", new_playthrough_path %>
+  <h1 class="app-title">Start</h1>
 
-<div class="container">
-  <div class="header">
-    <h1>My Playthroughs</h1>
-    <%= link_to "＋ New", new_playthrough_path, class: "btn-new" %>
-  </div>
 
-  <% if @playthroughs.any? %>
-    <div class="cards">
-      <% @playthroughs.each do |playthrough| %>
-        <%= link_to playthrough_path(playthrough), class: "card" do %>
-          <h3><%= playthrough.game_version.capitalize %></h3>
-        <% end %>
+
+
+  <%= link_to new_playthrough_path, class: "start-button" do %>
+    START BUILDING<br>YOUR TEAM
+  <% end %>
+
+    <div class="cards-container">
+      <% 1.times do %>
+        <div class="playthrough-card">
+        <%= image_tag "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png", class: "game-image" %>
+          <p class="card-title"></p>
+        </div>
       <% end %>
     </div>
-  <% else %>
-    <p class="empty">No playthroughs found.</p>
-  <% end %>
-</div>
+
+  </div>

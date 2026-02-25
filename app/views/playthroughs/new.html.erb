@@ -1,15 +1,30 @@
-<h1>New Playthrough</h1>
+<h1>Choose a game</h1>
 
 <%= form_with model: @playthrough do |f| %>
 
-  <%= f.label :game_version %>
-  <%= f.text_field :game_version %>
+<div class="cards">
 
-  <h3>Choose your starter</h3>
+  <div class="card">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png">
+    <p>Bulbasaur</p>
+  </div>
 
-  <%= select_tag :starter_pokemon_id,
-      options_from_collection_for_select(Pokemon.all, :id, :name) %>
+  <div class="card">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png">
+    <p>Charmander</p>
+  </div>
 
-  <%= f.submit "Create" %>
+</div>
+
+<br>
+
+<%= f.label :game_version %>
+
+<%= f.select :game_version,
+      Playthrough::GAME_VERSIONS.map { |v| [v.titleize, v] } %>
+
+<br><br>
+
+<%= f.submit "Next" %>
 
 <% end %>

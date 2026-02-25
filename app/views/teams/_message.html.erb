@@ -1,0 +1,7 @@
+<% @team.messages.each  do |message| %>
+  <% if message.role == "user" %>
+    <%= message.content %>
+  <% elsif message.role == "assistant" %>
+    <%= message.content %>
+  <% end %>
+<% end %>

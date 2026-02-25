@@ -1,26 +1,15 @@
-<div class="home-container">
+<h1 class="title">HOME PAGE</h1>
+<p class="context">We can make your trip special with your pokemon</p>
+<div class="pokeball"></div>
+  <%= link_to "Start", playthroughs_path %>
 
-  <h1 class="app-title">APP NAME</h1>
+  <div class="button-row">
+    <% if user_signed_in? %>
+    <%= button_to "Log out", destroy_user_session_path, method: :delete, class:"pokemon-btn" %>
+    <% else %>
+    <%= link_to "log In", new_user_session_path, class: "pokemon-btn" %>
 
-  <p class="app-description">
-    Text about the app: doajda hfaodid oihdoajsja
-    hashodajdoi oajdoisj hdfdsif oisjoajd oifodshfsh
-    jodahsiu ajadhaksh jdkhdadkjskjd
-  </p>
-
-<%= image_tag "pokeball.png", class: "pokeball-img" %>
-
-<%= link_to new_playthrough_path, class: "start-button" do %>
-  START BUILDING<br>YOUR TEAM
-<% end %>
-
-  <div class="cards-container">
-    <% 3.times do %>
-      <div class="playthrough-card">
-        <%= image_tag "firered.png", class: "game-image" %>
-        <p class="card-title">Playthrough 1</p>
-      </div>
-    <% end %>
+    <%= link_to "Sign In", new_user_registration_path,class: "pokemon-btn" %>
   </div>
-
-</div>
+<%= image_tag "https://i.gifer.com/FKVy.gif", alt: "コダック", class: "psy-gif" %>
+<% end %>
