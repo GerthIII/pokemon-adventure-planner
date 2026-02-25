@@ -9,24 +9,30 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
   end
 
-  # def new
-  #   @team = Team.new
-  # end
-
-  # def create
-  #   @team = Team.new(team_params)
-  #   if @team.save
-  #     puts "saved"
-  #     redirect_to team_path(@chat)
-  #   else
-  #     puts "did not save"
-  #   end
-  # end
+  def new
+    @playthrough = Playthrough.find(params[:playthrough_id])
+    @team = @playthrough.teams.build
+    game_version = @playthrough.game_version
+    @available_pokemon = Pokemon.where(game_version: game_version)
+  end
 
   def edit
     @team = Team.includes(:team_members).find(params[:id])
     game_version = @team.playthrough.game_version
     @available_pokemon = Pokemon.where(game_version: game_version)
+  end
+
+  def create
+    @playthrough = Playthrough.find(params[:playthrough_id])
+    @team = @playthrough.teams.build(team_params) # associate team to playthrough
+
+    if @team.save
+      redirect_to edit_team_path(@team), notice: "Team created!"
+    else
+      game_version = @playthrough.game_version
+      @available_pokemon = Pokemon.where(game_version: game_version)
+      render :new, status: :unprocessable_content
+    end
   end
 
   def update
@@ -36,14 +42,13 @@ class TeamsController < ApplicationController
     else
       game_version = @team.playthrough.game_version
       @available_pokemon = Pokemon.where(game_version: game_version)
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
   private
 
   def team_params
-    params.require(:team).permit(:name, pokemon_ids: [], messages_attributes: [:content, :role])
+    params.require(:team).permit(:name, pokemon_ids: [], messages_attributes: %i[content role])
   end
-
 end
