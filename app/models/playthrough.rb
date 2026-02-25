@@ -1,10 +1,4 @@
-class Playthrough < ApplicationRecord
-  belongs_to :user
-  has_many :teams
-
-  validates :game_version, presence: true
-
-  GAME_VERSIONS = [
+GAME_VERSIONS = [
     "red",
     "blue",
     "yellow",
@@ -54,4 +48,11 @@ class Playthrough < ApplicationRecord
     "legends-za",
     "mega-dimension"
   ]
+
+class Playthrough < ApplicationRecord
+  belongs_to :user
+  has_many :teams
+
+  validates :game_version, presence: true
+  validates :game_version, inclusion: { in: GAME_VERSIONS, message: "%{value} is not a valid game version" }
 end
