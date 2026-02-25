@@ -1,6 +1,8 @@
 <h1 class="title">HOME PAGE</h1>
 <p class="context">We can make your trip special with your pokemon</p>
 <div class="pokeball"></div>
+  <%= link_to "Start", playthroughs_path %>
+
   <div class="button-row">
     <% if user_signed_in? %>
     <%= button_to "Log out", destroy_user_session_path, method: :delete, class:"pokemon-btn" %>

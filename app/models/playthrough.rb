@@ -1,4 +1,8 @@
-GAME_VERSIONS = [
+class Playthrough < ApplicationRecord
+  belongs_to :user
+  has_many :teams, dependent: :destroy
+
+  GAME_VERSIONS = [
     "red",
     "blue",
     "yellow",
@@ -33,25 +37,16 @@ GAME_VERSIONS = [
     "lets-go-eevee",
     "sword",
     "shield",
-    "the-isle-of-armor",
-    "the-crown-tundra",
     "brilliant-diamond",
     "shining-pearl",
     "legends-arceus",
     "scarlet",
     "violet",
-    "the-teal-mask",
-    "the-indigo-disk",
     "red-japan",
     "green-japan",
     "blue-japan",
-    "legends-za",
-    "mega-dimension"
+    "legends-za"
   ]
-
-class Playthrough < ApplicationRecord
-  belongs_to :user
-  has_many :teams
 
   validates :game_version, presence: true
   validates :game_version, inclusion: { in: GAME_VERSIONS, message: "%{value} is not a valid game version" }

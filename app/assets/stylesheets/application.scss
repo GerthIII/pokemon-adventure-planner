@@ -10,3 +10,81 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "components/card";
+
+body {
+  background-color: #d9d9d9;
+  font-family: Arial, sans-serif;
+}
+
+
+.app-title {
+  font-size: 56px;
+  margin-bottom: 20px;
+}
+
+.app-description {
+  max-width: 650px;
+  margin: 0 auto 25px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.pokeball-img {
+  width: 55px;
+  margin: 15px 0 25px;
+}
+
+.home-container {
+  text-align: center;
+  padding-top: 60px;
+}
+
+/* ポケボール中央 */
+.pokeball-img {
+  display: block;
+  margin: 20px auto;   // ← 中央にする
+  width: 60px;
+}
+
+/* STARTボタン */
+.start-button {
+  display: inline-block;
+  background: #cfcfcf;
+  padding: 25px 80px;
+  border: 2px solid #888;
+  text-decoration: none;
+  color: black;
+  font-size: 22px;
+  margin-top: 10px;   // ← ボールとの距離
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+}
+
+.game-image {
+  width: 180px;
+}
+
+.card-title {
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin: 40px 0;
+}
+
+.card img {
+  width: 140px;
+}
+
+.card {
+  text-align: center;
+}
