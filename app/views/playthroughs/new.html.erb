@@ -1,0 +1,30 @@
+<h1>Choose a game</h1>
+
+<%= form_with model: @playthrough do |f| %>
+
+<div class="cards">
+
+  <div class="card">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png">
+    <p>Bulbasaur</p>
+  </div>
+
+  <div class="card">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png">
+    <p>Charmander</p>
+  </div>
+
+</div>
+
+<br>
+
+<%= f.label :game_version %>
+
+<%= f.select :game_version,
+      Playthrough::GAME_VERSIONS.map { |v| [v.titleize, v] } %>
+
+<br><br>
+
+<%= f.submit "Next" %>
+
+<% end %>

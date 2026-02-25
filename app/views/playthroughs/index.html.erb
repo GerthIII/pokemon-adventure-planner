@@ -1,0 +1,21 @@
+<div class="home-container">
+
+  <h1 class="app-title">Start</h1>
+
+
+
+
+  <%= link_to new_playthrough_path, class: "start-button" do %>
+    START BUILDING<br>YOUR TEAM
+  <% end %>
+
+    <div class="cards-container">
+      <% 1.times do %>
+        <div class="playthrough-card">
+        <%= image_tag "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png", class: "game-image" %>
+          <p class="card-title"></p>
+        </div>
+      <% end %>
+    </div>
+
+  </div>

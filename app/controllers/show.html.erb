@@ -1,0 +1,13 @@
+<h1><%= @playthrough.game_version %></h1>
+
+<h2><%= @team.name if @team %></h2>
+
+<% if @team && @team.pokemons.any? %>
+  <ul>
+    <% @team.pokemons.each do |pokemon| %>
+      <li><%= pokemon.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No pokemon yet.</p>
+<% end %>
