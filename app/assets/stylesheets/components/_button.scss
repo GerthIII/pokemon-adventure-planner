@@ -1,0 +1,31 @@
+.button-row {
+  display: flex;
+  justify-content: center; 
+  gap: 20px;
+
+.pokemon-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #ff1c1c;
+  color: white;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 50px;
+  border-bottom: 5px solid #b30000;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    background-color: #ff3e3e;
+  }
+
+
+  &:active {
+    transform: translateY(2px);
+    border-bottom: 2px solid #b30000;
+  }
+  }
+}
