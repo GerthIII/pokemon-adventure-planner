@@ -1,15 +1,26 @@
 <h1 class="title">HOME PAGE</h1>
 <p class="context">We can make your trip special with your pokemon</p>
-<div class="pokeball"></div>
-  <%= link_to "Start", playthroughs_path %>
 
-  <div class="button-row">
+<div class="button-row">
+  <% if user_signed_in? %>
+    <div class="pokeball-container">
+      <div class="speech-bubble">Press pokeball to start!</div>
+      <%= link_to playthroughs_path, class: "pokeball-link" do %>
+        <div class="pokeball"></div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="pokeball disabled"></div>
+  <% end %>
+
+  <div class="buttons">
     <% if user_signed_in? %>
-    <%= button_to "Log out", destroy_user_session_path, method: :delete, class:"pokemon-btn" %>
+      <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "pokemon-btn" %>
     <% else %>
-    <%= link_to "log In", new_user_session_path, class: "pokemon-btn" %>
-
-    <%= link_to "Sign In", new_user_registration_path,class: "pokemon-btn" %>
+      <%= link_to "Log in", new_user_session_path, class: "pokemon-btn" %>
+      <%= link_to "Sign up", new_user_registration_path, class: "pokemon-btn" %>
+    <% end %>
   </div>
+</div>
+
 <%= image_tag "https://i.gifer.com/FKVy.gif", alt: "コダック", class: "psy-gif" %>
-<% end %>
