@@ -24,7 +24,5 @@
 
 <%= simple_form_for [@playthrough, @team] do |f| %>
   <%= f.input :name, label: "Team Name" %>
-  <%= f.input :fpn, label: "First Pokemon Name",
-  input_html: { value: @team.team_members.first&.pokemon&.name } %>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

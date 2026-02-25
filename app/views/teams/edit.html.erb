@@ -11,16 +11,12 @@
         <div class="col-md-4 mb-3">
           <label class="fw-bold text-light">Slot <%= i + 1 %></label>
 
-          <%= f.input :pokemon_ids,
-                      collection: @available_pokemon,
-                      label: false,
-                      prompt: "Select a Pokemon",
-                      include_blank: "Leave blank for AI recommendation",
-                      selected: current_member&.pokemon_id,
-                      input_html: {
-                        name: "team[pokemon_ids][]",
-                        class: "rounded-pill shadow-sm"
-                      } %>
+           <%= select_tag "team[pokemon_ids][]",
+            options_from_collection_for_select(
+              @available_pokemon, :id, :name, current_member&.pokemon_id
+            ),
+            include_blank: "Leave blank for AI recommendation",
+            class: "form-select rounded-pill shadow-sm" %>
         </div>
       <% end %>
     </div>
