@@ -18,10 +18,9 @@ class TeamsController < ApplicationController
 
   def create
     @playthrough = Playthrough.find(params[:playthrough_id])
-    @team = @playthrough.teams.build(team_params.except(:first_pokemon_name)) # associate team to playthrough
+    @team = @playthrough.teams.build(team_params) # associate team to playthrough
 
     if @team.save
-      attach_first_pokemon!(@team, team_params[:first_pokemon_name])
       redirect_to edit_team_path(@team), notice: "Team created!"
     else
       game_version = @playthrough.game_version
@@ -32,9 +31,8 @@ class TeamsController < ApplicationController
 
   def update
     @team = Team.find(params[:id])
-    if @team.update(team_params.except(:first_pokemon_name))
-      attach_first_pokemon!(@team, team_params[:first_pokemon_name])
-      redirect_to edit_team_path(@team), notice: "Team updated!"
+    if @team.update(team_params)
+      redirect_to team_path(@team), notice: "Team updated!"
     else
       game_version = @team.playthrough.game_version
       @available_pokemon = Pokemon.where(game_version: game_version)
@@ -45,17 +43,6 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, :first_pokemon_name, pokemon_ids: [], messages_attributes: %i[content role])
-  end
-
-  def attach_first_pokemon!(team, pokemon_name)
-    return if pokemon_name.blank?
-
-    pokemon = Pokemon.find_by("LOWER(name) = ?", pokemon_name.strip.downcase)
-    return unless pokemon # ou trate com erro/flash
-
-    member = team.team_members.first_or_initialize
-    member.pokemon = pokemon
-    member.save!
+    params.require(:team).permit(:name, pokemon_ids: [], messages_attributes: %i[content role])
   end
 end
