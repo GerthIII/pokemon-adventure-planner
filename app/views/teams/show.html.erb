@@ -1,20 +1,26 @@
-<h1><%= @team.name %></h1>
+<h1>Team: <%= @team.name %></h1>
 <!--replace with team name-->
-<div class="party d-flex justify-content-between">
+<div class="party d-flex flex-wrap gap-3 justify-content-center">
   <% @team.team_members.each do |member| %>
-    <div class="pokemon1">
-      <h3><%= member.pokemon.name %></h3>
-      <p>Ability: <%= member.ability %></p>
-      <p>Nature: <%= member.nature %></p>
-      <p>Item: <%= member.held_item %></p>
-      <h3>Move Set</h3>
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src=<%= member.pokemon.image_url %> alt="Card image cap">
+    <div class="card-body">
+      <h3 class="card-title"><%= member.pokemon.name.capitalize %></h3>
+      <p class="card-text">Ability: <%= member.ability %></p>
+      <p class="card-text">Nature: <%= member.nature %></p>
+      <p class="card-text">Item: <%= member.held_item %></p>
+      <h3 class="card-title">Move Set</h3>
       <ul>
-        <li><%= member.move_1 %></li>
-        <li><%= member.move_2 %></li>
-        <li><%= member.move_3 %></li>
-        <li><%= member.move_4 %></li>
+        <li class="card-text"><%= member.move_1 %></li>
+        <li class="card-text"><%= member.move_2 %></li>
+        <li class="card-text"><%= member.move_3 %></li>
+        <li class="card-text"><%= member.move_4 %></li>
       </ul>
+    </div>
     </div>
   <% end %>
 </div>
-<%= link_to "Edit Team", edit_team_path(@team), class: "btn btn-info fw-bold px-4 rounded-pill shadow" %>
+<div class="container d-flex gap-5 justify-content-center">
+  <%= link_to "Edit Team", edit_team_path(@team), class: "btn btn-info fw-bold px-4 rounded-pill shadow" %>
+  <%= link_to "See My Teams", playthrough_path(@team), class: "btn btn-info fw-bold px-4 rounded-pill shadow" %>
+</div>
