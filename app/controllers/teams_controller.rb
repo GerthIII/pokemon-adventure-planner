@@ -1,8 +1,7 @@
 class TeamsController < ApplicationController
 
   def index
-    @playthrough = Playthrough.find(params[:playthrough_id])
-    @teams = @playthrough.teams
+    @teams = Team.all
   end
 
   def show
