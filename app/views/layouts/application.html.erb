@@ -21,6 +21,40 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom fixed-top w-100 mb-4">
+      <!-- navbar and the nav tag are telling the screen reader that this is the navbar -->
+      <!-- navbar-expand lg makes the navbar large on a computer but collapses it on mobile to save space -->
+      <div class="container-fluid">
+        <h3 class=" pt-2 fs-5 fw-bold">Poke Adventure Planner</h3>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+          <!-- navbar toggler is the hamburger icon when the navbar is collapsed -->
+          <!-- data-bs-toggle and target give you the navbar buttons when you press the hamburger icon -->
+        </button>
+        <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNav">
+          <!-- collapse and navbar-collapse are a wrapper that hold the navbar buttons. It is hidden until hamburger is clicked. -->
+          <ul class="navbar-nav"> <!-- this makes the list into a flexbox and removes the bullet points-->
+            <li class="nav-item"> <!-- this will handle the spacing and any hover effects we add to links -->
+              <%= link_to "Home", root_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "My Playthroughs", playthroughs_path, class: "nav-link" %>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link text-danger" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <div aria-live="polite" aria-atomic="true" class="position-fixed top-50 end-0 p-3" style="z-index: 1100;">
       <% flash.each do |type, msg| %>
         <div class="alert <%= type == 'notice' ? 'alert-info' : 'alert-danger' %> alert-dismissible fade show shadow-lg border-0" role="alert" style="min-width: 250px;">
