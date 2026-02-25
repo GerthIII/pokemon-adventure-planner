@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <div class="row row-cols-auto g-4">
+    <% @teams.each do |team| %>
+      <div class="col">
+        <%= link_to edit_team_path(team), class: "text-decoration-none text-dark" do %>
+          <div class="card h-100 shadow-sm hover-shadow" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title fw-bold"><%= team.name %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= team.playthrough.game_version.capitalize %> Version Playthrough</h6>
+              <div class="mt-3">
+                <% team.pokemons.each do |pokemon| %>
+                  <span class="badge bg-light text-dark border me-1"><%= pokemon.name %></span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="new-team-button mt-3">
+    <%= link_to "Create a new Team", new_playthrough_team_path, class: "btn btn-info fw-bold rounded-pill" %>
+  </div>
+</div>

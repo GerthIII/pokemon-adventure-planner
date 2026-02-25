@@ -1,24 +1,23 @@
-<h1>Team: <%= @team.name %></h1>
-<!--replace with team name-->
-<div class="party d-flex flex-wrap gap-3 justify-content-center">
-  <% @team.team_members.each do |member| %>
-    <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src=<%= member.pokemon.image_url %> alt="Card image cap">
-    <div class="card-body">
-      <h3 class="card-title"><%= member.pokemon.name.capitalize %></h3>
-      <p class="card-text">Ability: <%= member.ability %></p>
-      <p class="card-text">Nature: <%= member.nature %></p>
-      <p class="card-text">Item: <%= member.held_item %></p>
-      <h3 class="card-title">Move Set</h3>
-      <ul>
-        <li class="card-text"><%= member.move_1 %></li>
-        <li class="card-text"><%= member.move_2 %></li>
-        <li class="card-text"><%= member.move_3 %></li>
-        <li class="card-text"><%= member.move_4 %></li>
-      </ul>
-      <p class="card-text">Progression Strategy: <%= member.progression_strategy %></p>
-    </div>
-    </div>
-  <% end %>
+<div class="container mt-5">
+  <h1>Playthrough: <%= @team.playthrough.game_version.capitalize %></h1>
+  <hr class="border-light">
+  <h3>My Teams</h3>
+  <div class="list-group">
+    <% @team.playthrough.teams.each do |team| %>
+      <%# link_to generates the <a> tag to your team show page %>
+      <%= link_to team_path(team), class: "list-group-item list-group-item-action bg-dark text-light border-secondary d-flex justify-content-between align-items-center mb-2 rounded shadow-sm" do %>
+        <div>
+          <strong class="fs-5 text-info"><%= team.name %></strong>
+          <span class="ms-3">
+            <%= team.team_members.count %> Pokémon
+          </span>
+        </div>
+        <i class="fa-solid fa-chevron-right"></i>
+      <% end %>
+    <% end %>
+  </div>
+  <%# Button to start a brand new team for this specific playthrough %>
+  <div class="mt-4">
+    <%= link_to "Create New Team", new_playthrough_team_path(@team.playthrough), class: "btn btn-info fw-bold rounded-pill" %>
+  </div>
 </div>
-<%= link_to "Edit Team", edit_team_path(@team), class: "btn btn-info fw-bold px-4 rounded-pill shadow" %>

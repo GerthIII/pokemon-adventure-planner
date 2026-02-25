@@ -1,4 +1,10 @@
 class TeamsController < ApplicationController
+
+  def index
+    @playthrough = Playthrough.find(params[:playthrough_id])
+    @teams = @playthrough.teams
+  end
+
   def show
     @team = Team.find(params[:id])
   end
