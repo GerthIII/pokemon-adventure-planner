@@ -20,6 +20,7 @@ pokemon = Pokemon.last
 
 playthrough = Playthrough.create!(user: user, game_version: "red")
 team = Team.create!(id:1, name:"Kenji", playthrough: playthrough)
+team.update!(playthrough_id: playthrough_id)
 random_pokemons.each do |pokemon|
  TeamMember.create!(team: team, pokemon: pokemon)
 end
