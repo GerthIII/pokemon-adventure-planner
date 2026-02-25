@@ -1,7 +1,30 @@
 .button-row {
   display: flex;
-  justify-content: center; 
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.buttons {
+  display: flex;
   gap: 20px;
+}
+.pokeball-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .speech-bubble {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; // 吹き出し自体がマウスに反応しないようにする
+  }
+
+  // 「モンスターボールの箱」にマウスが乗った時だけ表示
+  &:hover .speech-bubble {
+    opacity: 1;
+  }
+}
 
 .pokemon-btn {
   display: inline-block;
@@ -22,10 +45,8 @@
     background-color: #ff3e3e;
   }
 
-
   &:active {
     transform: translateY(2px);
     border-bottom: 2px solid #b30000;
-  }
   }
 }

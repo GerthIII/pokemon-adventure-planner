@@ -1,0 +1,41 @@
+<div class="home-container">
+
+  <h1 class="app-title">Select Your Game</h1>
+
+  <p class="app-description">
+    What game are you playing?
+  </p>
+
+  <div class="game-select-wrapper">
+
+    <div class="game-card">
+
+      <%= button_to "GAME 1",
+        playthroughs_path(
+          playthrough: { game_version: "firered" },
+          starter_pokemon_id: 1
+        ),
+        method: :post,
+        class: "game-button" %>
+
+      <div class="black-image"></div>
+
+    </div>
+
+    <div class="game-card">
+
+      <%= button_to "GAME 2",
+        playthroughs_path(
+          playthrough: { game_version: "leafgreen" },
+          starter_pokemon_id: 1
+        ),
+        method: :post,
+        class: "game-button" %>
+
+      <div class="black-image"></div>
+
+    </div>
+
+  </div>
+
+</div>
