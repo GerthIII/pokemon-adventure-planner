@@ -11,7 +11,7 @@ User.destroy_all
 # Cria todos os Pokémon do JSON
 
 current_game = pokemons_arr.select do |poke|
-  poke["game_version"] == "firered"
+  ["firered", "leafgreen"].include?(poke["game_version"])
 end
 
 current_game.each do |poke|
