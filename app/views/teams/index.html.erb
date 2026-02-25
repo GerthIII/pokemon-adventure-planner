@@ -1,3 +1,14 @@
-<% @teams.each do |team| %>
-  <%= Team.name  %>
-<% end %>
+<div class="teams-grid ">
+  <% @teams.each do |team| %>
+    <%= link_to edit_team_path(team), class: "team-card-link" do %>
+      <div class="team-card">
+        <h3><%= team.name %></h3>
+        <div class="pokemon-icons">
+          <% team.pokemons.each do |pokemon| %>
+            <span><%= pokemon.name %></span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
