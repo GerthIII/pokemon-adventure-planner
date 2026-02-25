@@ -19,7 +19,8 @@ current_game.each do |poke|
     name: poke["name"],
     type_1: poke["types"]&.first || "unknown",
     type_2: poke["types"]&.second,
-    game_version: poke["game_version"] )
+    game_version: poke["game_version"],
+    image_url: poke["image_url"])
   end
 
   user = User.create!(email: "ash@gmail.com", password: "123123")
