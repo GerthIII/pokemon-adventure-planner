@@ -1,27 +1,57 @@
-<h1>Team: <%= @team.name %></h1>
-<!--replace with team name-->
-<div class="party d-flex flex-wrap gap-3 justify-content-center">
-  <% @team.team_members.each do |member| %>
-    <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src=<%= member.pokemon.image_url %> alt="Card image cap">
-    <div class="card-body">
-      <h3 class="card-title"><%= member.pokemon.name.capitalize %></h3>
-      <p class="card-text">Ability: <%= member.ability %></p>
-      <p class="card-text">Nature: <%= member.nature %></p>
-      <p class="card-text">Item: <%= member.held_item %></p>
-      <h3 class="card-title">Move Set</h3>
-      <ul>
-        <li class="card-text"><%= member.move_1 %></li>
-        <li class="card-text"><%= member.move_2 %></li>
-        <li class="card-text"><%= member.move_3 %></li>
-        <li class="card-text"><%= member.move_4 %></li>
+<div class="container p-3">
+  <h1>Team: <%= @team.name %></h1>
+  <!--replace with team name-->
+  <div class="party d-flex flex-wrap gap-3 justify-content-center">
+    <% @team.team_members.each do |member| %>
+  <div class="card shadow-sm" style="width: 18rem;">
+    <%= image_tag member.pokemon.image_url,
+          class: "card-img-top",
+          alt: member.pokemon.name %>
+
+    <div class="card-body text-center">
+      <!-- Title (maior destaque) -->
+      <h2 class="card-title fw-bold mb-2">
+        <%= member.pokemon.name.capitalize %>
+      </h2>
+
+      <!-- Badges -->
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+        <span class="badge rounded-pill bg-danger">
+          Ability: <%= member.ability %>
+        </span>
+        <span class="badge rounded-pill bg-success">
+          Nature: <%= member.nature %>
+        </span>
+        <span class="badge rounded-pill bg-warning text-dark">
+          Item: <%= member.held_item %>
+        </span>
+      </div>
+
+      <!-- Divider -->
+      <hr>
+
+      <!-- Move Set -->
+      <h5 class="fw-semibold mb-2">Move Set</h5>
+      <ul class="list-unstyled text-start small mb-0">
+        <li>• <%= member.move_1 %></li>
+        <li>• <%= member.move_2 %></li>
+        <li>• <%= member.move_3 %></li>
+        <li>• <%= member.move_4 %></li>
       </ul>
-      <p class="card-text">Progression Strategy: <%= member.progression_strategy %></p>
+
+      <!-- Divider -->
+      <hr>
+
+      <!-- Description text -->
+      <p class="card-text text-muted mb-3">
+        <%= member.progression_strategy %>
+      </p>
     </div>
-    </div>
-  <% end %>
-</div>
-<div class="container d-flex gap-5 justify-content-center">
-  <%= link_to "Edit Team", edit_team_path(@team), class: "btn btn-info fw-bold px-4 rounded-pill shadow" %>
-  <%= link_to "See My Teams", playthrough_path(@team), class: "btn btn-info fw-bold px-4 rounded-pill shadow" %>
+  </div>
+    <% end %>
+  </div>
+  <div class="container d-flex gap-5 justify-content-center m-3">
+    <%= link_to "Edit Team", edit_team_path(@team), class: "btn btn-info fw-bold px-4 rounded-pill shadow" %>
+    <%= link_to "See My Teams", playthrough_path(@team), class: "btn btn-info fw-bold px-4 rounded-pill shadow" %>
+  </div>
 </div>
