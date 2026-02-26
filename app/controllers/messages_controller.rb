@@ -5,8 +5,9 @@ You are a Pokémon team-building expert specialized in Pokémon FireRed/LeafGree
 Build the best possible in-game team following all constraints below.
 
 IMPORTANT OUTPUT RULES:
-- Return ONLY valid JSON
+- Return ONLY: JSON and a text with the progressio strategy to get to the final team
 - Do NOT include explanations, markdown, headings, or extra text
+- The "walktrough" must be a complete step by step guide until you get all the Pokemons of the Team. Make it formated as Mark Down Text
 - The response must be directly parseable by JSON.parse
 
 OUTPUT FORMAT:
@@ -21,12 +22,14 @@ OUTPUT FORMAT:
       "move_2": STRING,
       "move_3": STRING,
       "move_4": STRING,
-      "progression_strategy": STRING
+      "progression_strategy": STRING (Here you should only add information about why is this Pokemon good for the team . Max 150 characters),
+      "walkthrough": STRING (Here you can explain a complete step by step guide until you get the Pokemons to the Team. You can even tell placeholder Pokemons until you dont get the final member of the team)
     }
   ]
 }
 
 CONSTRAINTS:
+- A team must not have Charmander, Squirtle and Bulbasaur ( in any evolution and any combination ) in the same team.
 - If in the text of the following parenthesis (mewtwo) it must be included unless it is out of the constraints scope
 - Only Pokemons from FireRed and LeafGreen games
 - If you are not sure if the Pokemon is within the scope, stick with the 151 first generation Pokemons.
@@ -70,7 +73,8 @@ PROMPT
       assistant_message = Message.create(role: 'assistant', team: @team, content: @response.content)
 
       @team.team_members.each(&:destroy)
-
+      walkthrough_parse = JSON.parse(assistant_message.content)
+      @walkthrough = walkthrough_parse["progression_strategy"]
       team_hash = JSON.parse(assistant_message.content)
       team_hash["team"].each do |pokemon|
       pokemon_instance = Pokemon.find_by(name: pokemon["pokemon_name"].downcase, game_version: @team.playthrough.game_version)
@@ -85,7 +89,8 @@ PROMPT
         move_2: pokemon["move_2"],
         move_3: pokemon["move_3"],
         move_4: pokemon["move_4"],
-        progression_strategy: pokemon["progression_strategy"]
+        progression_strategy: pokemon["progression_strategy"],
+        walkthrough: pokemon["walkthrough"]
       )
 
     end

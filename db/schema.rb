@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_25_044934) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_26_081547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,9 +51,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_25_044934) do
     t.string "move_4"
     t.string "nature"
     t.bigint "pokemon_id", null: false
+    t.string "progression"
     t.string "progression_strategy"
     t.bigint "team_id", null: false
     t.datetime "updated_at", null: false
+    t.text "walkthrough"
     t.index ["pokemon_id"], name: "index_team_members_on_pokemon_id"
     t.index ["team_id"], name: "index_team_members_on_team_id"
   end
