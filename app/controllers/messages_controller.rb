@@ -41,8 +41,6 @@ CONSTRAINTS:
 PROMPT
 
   def create
-    TeamMember.destroy_all
-    Message.destroy_all
     @team = Team.find(params[:team_id])
     @message = Message.new(message_params)
     @message.team = @team
@@ -54,9 +52,11 @@ PROMPT
       @response = ruby_llm.ask(@message.content)
       assistant_message = Message.create(role: 'assistant', team: @team, content: @response.content)
 
+      @team.team_members.each(&:destroy)
+
       team_hash = JSON.parse(assistant_message.content)
       team_hash["team"].each do |pokemon|
-      pokemon_instance = Pokemon.find_by(name: pokemon["pokemon_name"].downcase)
+      pokemon_instance = Pokemon.find_by(name: pokemon["pokemon_name"].downcase, game_version: @team.playthrough.game_version)
 
       TeamMember.create(
         team: @team,

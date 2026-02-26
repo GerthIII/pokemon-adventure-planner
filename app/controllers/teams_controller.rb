@@ -20,6 +20,7 @@ class TeamsController < ApplicationController
     @team = Team.includes(:team_members).find(params[:id])
     game_version = @team.playthrough.game_version
     @available_pokemon = Pokemon.where(game_version: game_version)
+
   end
 
   def create
