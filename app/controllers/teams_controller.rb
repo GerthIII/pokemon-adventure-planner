@@ -18,6 +18,7 @@ class TeamsController < ApplicationController
 
   def edit
     @team = Team.includes(:team_members).find(params[:id])
+    @playthrough = @team.playthrough
     game_version = @team.playthrough.game_version
     @available_pokemon = Pokemon.where(game_version: game_version)
 
