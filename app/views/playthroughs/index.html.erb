@@ -38,6 +38,7 @@
                 class: "game-image" %>
 
               <h3><%= playthrough.game_version %></h3>
+              <%= link_to "My Teams", playthrough_teams_path(playthrough) %>
 
               <% if playthrough.teams&.any? %>
                 <p>Team: <%= playthrough.teams.last.name %></p>
