@@ -50,3 +50,66 @@
     border-bottom: 2px solid #b30000;
   }
 }
+.title {
+  background-color: #222;
+  color: #f3c13a;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  border: 4px solid #444;
+}
+
+.col-md-4 {
+  .slot-wrapper {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-5px);
+    }
+  }
+}
+.btn-primary {
+  border-radius: 50px;
+  border: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+}
+input[type="submit"].btn-primary {
+  background: #3b4cca;
+  box-shadow: 0 4px 0 #2a3891;
+  width: 100%;
+  padding: 15px;
+
+  &:hover {
+    background: #4a5dec;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #2a3891;
+  }
+}
+.container.mt-4 .btn-primary {
+  background: #ff0000;
+  box-shadow: 0 4px 0 #cc0000;
+
+  &:hover {
+    background: #ff3333;
+    box-shadow: 0 6px 0 #cc0000;
+  }
+}
+.rounded-pill.shadow-sm {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid transparent;
+  transition: all 0.3s;
+
+  &:focus {
+    border-color: #3b4cca;
+    box-shadow: 0 0 15px rgba(59, 76, 202, 0.3)
+  }
+}
