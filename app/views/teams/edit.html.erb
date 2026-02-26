@@ -1,45 +1,42 @@
-<div class="container">
+<div class="container" data-controller="get-pokemon">
   <h1>Edit Your Team: <%= @team.name %></h1>
-
-  <!-- TEAM UPDATE FORM -->
-  <%= simple_form_for @team do |f| %>
-    <div class="row">
-      <% members = @team.team_members.all %>
-      <% 6.times do |i| %>
-        <% current_member = members[i] %>
-
-        <div class="col-md-4 mb-3">
-          <label class="fw-bold text-light">Slot <%= i + 1 %></label>
-
-           <%= select_tag "team[pokemon_ids][]",
-            options_from_collection_for_select(
-              @available_pokemon, :id, :name, current_member&.pokemon_id
-            ),
-            include_blank: "Leave blank for AI recommendation",
-            class: "form-select rounded-pill shadow-sm" %>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="d-flex justify-content-center mt-4">
-      <%= f.submit "Update Team",
-            class: "btn btn-primary fw-bold rounded-pill px-5 py-2" %>
-    </div>
-  <% end %>
-
-  <!-- AI MESSAGE FORM -->
-  <div class="mt-4">
-    <%= simple_form_for [@team, Message.new] do |m| %>
-      <%= m.input :content,
-            as: :text,
-            label: "Ask the AI for Advice",
-            placeholder: "e.g. Can I get a Scizor before the Elite Four?" %>
-
-      <%= m.hidden_field :role, value: "user" %>
-
-      <div class="d-flex justify-content-center">
-        <%= m.submit "Ask AI", class: "btn btn-primary fw-bold rounded-pill px-5 py-2" %>
-      </div>
+  <div>
+    <%= simple_form_for @team do |f| %>
+      <div class="row">
+        <% 6.times do |i| %>
+          <% current_member_id = @team.team_members[i]&.pokemon&.id || "" %>
+          <div class="col-md-4 mb-3">
+            <label class="fw-bold text-light">Slot <%= i + 1 %></label>
+            <%= select_tag "team[pokemon_ids][]",
+                options_from_collection_for_select(@available_pokemon, :id, :name, current_member_id),
+                        include_blank: "Leave blank for AI recommendation",
+                        class: "rounded-pill shadow-sm",
+                        data: {
+                          get_pokemon_target: "slot",
+                          slot_index: i,
+                          action: "change->get-pokemon#capture"
+                        } %>
+          </div>
+        <% end %>
+      <%= f.submit "Update Team", class: "btn btn-primary" %>
     <% end %>
+    </div>
   </div>
+    <div class="container mt-4">
+    <%# Use fields_for to target the Message model %>
+      <%= simple_form_for [@team, Message.new] do |m| %>
+        <%= m.input :content,
+              as: :text,
+              label: "Ask the AI for Advice",
+              placeholder: "e.g. Can I get a Scizor before the Elite Four?",
+              input_html: { data: { team_builder_target: "question" } } %>
+
+           <%= m.hidden_field :role, value: "user" %>
+           <%= hidden_field_tag "message[team_context]",
+        "",
+        data: { get_pokemon_target: "teamContext" } %>
+        <%= m.submit "Ask AI", class: "btn btn-primary", data: { action: "click->get-pokemon#inject" } %>
+      <% end %>
+      <%= link_to "Back", playthrough_teams_path(@playthrough), class: "btn btn-primary my-5 w-100" %>
+      </div>
 </div>

@@ -1,4 +1,4 @@
-<h1>Build Your Team</h1>
+<h1 class="title">Build Your Team</h1>
 
 
 <div class="cards">
@@ -23,6 +23,11 @@
 <br>
 
 <%= simple_form_for [@playthrough, @team] do |f| %>
-  <%= f.input :name, label: "Team Name" %>
+  <%= f.input :name %>
+  <%= f.input :pokemon_ids,
+              collection: Pokemon.where(name: ["charmander", "squirtle", "bulbasaur"], game_version: @playthrough.game_version),
+              label: false,
+              include_blank: "Select a Starter Pokemon",
+              input_html: { name: "team[pokemon_ids][]", class: "rounded-pill shadow-sm" } %>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

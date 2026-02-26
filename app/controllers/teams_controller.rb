@@ -1,6 +1,13 @@
 class TeamsController < ApplicationController
+
+  def index
+    @playthrough = Playthrough.find(params[:playthrough_id])
+    @teams = @playthrough.teams
+  end
+
   def show
     @team = Team.find(params[:id])
+    @playthrough = @team.playthrough
   end
 
   def new
@@ -12,8 +19,10 @@ class TeamsController < ApplicationController
 
   def edit
     @team = Team.includes(:team_members).find(params[:id])
+    @playthrough = @team.playthrough
     game_version = @team.playthrough.game_version
     @available_pokemon = Pokemon.where(game_version: game_version)
+
   end
 
   def create

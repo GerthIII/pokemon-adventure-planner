@@ -10,6 +10,8 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "components/teams";
+@import "pages/index";
 @import "components/card";
 
 body {
@@ -19,8 +21,14 @@ body {
 
 
 .app-title {
-  font-size: 56px;
-  margin-bottom: 20px;
+  background-color: #1a1a1a;
+  color: #FFEA00;
+  padding: 10px;
+  text-align: center;
+  font-family: 'Helvetica Neue', sans-serif;
+  letter-spacing: 20px;
+  border-left: 5px solid #FFEA00;
+  border-radius: 10px;
 }
 
 .app-description {
@@ -38,6 +46,7 @@ body {
 .home-container {
   text-align: center;
   padding-top: 60px;
+  border-radius: 10px;
 }
 
 /* ポケボール中央 */
@@ -56,13 +65,21 @@ body {
   text-decoration: none;
   color: black;
   font-size: 22px;
-  margin-top: 10px;   // ← ボールとの距離
+  margin-top: 10px;
+  border-radius: 10px;
+  &:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.1);
+  }
 }
+
 
 .cards-container {
   display: flex;
   justify-content: center;
   gap: 80px;
+  border-radius: 10px;
 }
 
 .game-image {
@@ -87,4 +104,14 @@ body {
 
 .card {
   text-align: center;
+}
+.choose-card {
+  background-color: #1a1a1a;
+  color: #FFEA00;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Helvetica Neue', sans-serif;
+  letter-spacing: 2px;
+  border-left: 5px solid #FFEA00;
+  border-radius: 10px;
 }
