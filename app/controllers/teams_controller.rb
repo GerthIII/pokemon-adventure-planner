@@ -7,6 +7,7 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    @playthrough = @team.playthrough
   end
 
   def new
