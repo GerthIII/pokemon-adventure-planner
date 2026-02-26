@@ -1,21 +1,69 @@
 <div class="home-container">
 
-  <h1 class="app-title">Start</h1>
+  <!-- HERO -->
+  <div class="hero">
 
+    <h1 class="app-title">APP NAME</h1>
 
+    <p class="app-description">
+      Text about the app: build your Pokémon adventure team.
+    </p>
 
+    <%= image_tag "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png",
+                  class: "pokeball-img" %>
 
-  <%= link_to new_playthrough_path, class: "start-button" do %>
-    START BUILDING<br>YOUR TEAM
-  <% end %>
-
-    <div class="cards-container">
-      <% 1.times do %>
-        <div class="playthrough-card">
-        <%= image_tag "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png", class: "game-image" %>
-          <p class="card-title"></p>
-        </div>
-      <% end %>
-    </div>
+    <%= link_to "START BUILDING YOUR TEAM",
+        new_playthrough_path,
+        class: "start-button" %>
 
   </div>
+
+
+  <% if @playthroughs.any? %>
+
+    <!-- CAROUSEL -->
+    <h2 class="section-title">Your Adventures</h2>
+
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+
+      <div class="carousel-inner">
+
+        <% @playthroughs.each_with_index do |playthrough, index| %>
+
+          <div class="carousel-item <%= 'active' if index == 0 %>">
+
+            <div class="playthrough-card text-center">
+
+              <%= image_tag "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+                class: "game-image" %>
+
+              <h3><%= playthrough.game_version %></h3>
+
+              <% if playthrough.teams&.any? %>
+                <p>Team: <%= playthrough.teams.last.name %></p>
+              <% else %>
+                <p>No team yet</p>
+              <% end %>
+
+            </div>
+
+          </div>
+
+        <% end %>
+
+      </div>
+
+      <!-- controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+
+    </div>
+
+  <% end %>
+
+</div>
