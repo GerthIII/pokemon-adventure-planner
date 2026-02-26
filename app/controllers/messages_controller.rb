@@ -84,7 +84,8 @@ PROMPT
         move_1: pokemon["move_1"],
         move_2: pokemon["move_2"],
         move_3: pokemon["move_3"],
-        move_4: pokemon["move_4"]
+        move_4: pokemon["move_4"],
+        progression_strategy: pokemon["progression_strategy"]
       )
 
     end

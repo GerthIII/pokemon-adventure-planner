@@ -37,6 +37,6 @@
         data: { get_pokemon_target: "teamContext" } %>
         <%= m.submit "Ask AI", class: "btn btn-primary", data: { action: "click->get-pokemon#inject" } %>
       <% end %>
+      <%= link_to "Back", playthrough_teams_path(@playthrough), class: "btn btn-primary my-5 w-100" %>
       </div>
-      <%= link_to "My Teams", playthrough_teams_path(@playthrough) %>
 </div>
