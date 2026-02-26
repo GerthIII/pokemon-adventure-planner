@@ -27,7 +27,6 @@ OUTPUT FORMAT:
 }
 
 CONSTRAINTS:
-- Starter must be Charmander
 - If in the text of the following parenthesis (mewtwo) it must be included unless it is out of the constraints scope
 - Only Pokemons from FireRed and LeafGreen games
 - If you are not sure if the Pokemon is within the scope, stick with the 151 first generation Pokemons.
@@ -47,8 +46,26 @@ PROMPT
     @message.role = "user"
 
     if @message.save
+        team_context = params.dig(:message, :team_context)
+        selected_ids = []
+
+    if team_context.present?
+      parsed = begin
+        JSON.parse(team_context)
+      rescue JSON::ParserError
+       {}
+      end
+      selected_ids = (parsed["pokemon_ids"] || []).reject(&:blank?).map(&:to_i)
+    end
+
+    selected_names = Pokemon.where(id: selected_ids).pluck(:name)
+    puts selected_names
+    user_prompt = <<~USER
+      The following Pokemons #{selected_names.join(", ")} are mandatory in the lits. Create a list that contains these Pokemons.
+      USER
+
       ruby_llm = RubyLLM.chat
-      ruby_llm.with_instructions(SYSTEM_PROMPT)
+      ruby_llm.with_instructions("#{SYSTEM_PROMPT}\n#{user_prompt}")
       @response = ruby_llm.ask(@message.content)
       assistant_message = Message.create(role: 'assistant', team: @team, content: @response.content)
 
@@ -82,6 +99,6 @@ PROMPT
   private
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :role)
   end
 end
