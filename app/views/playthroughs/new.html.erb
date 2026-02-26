@@ -1,5 +1,6 @@
-<h1>Choose a game</h1>
+<h1 class= "choose-card">Choose a game</h1>
 
+<%= image_tag "https://www.pokemon.co.jp/ex/VCAMAP/game/images/ss_12.jpg", alt: "ポケモンバージョン", class: "poke-logo" %>
 <%= form_with model: @playthrough do |f| %>
 
 <div class="cards">
@@ -25,6 +26,8 @@
 
 <br><br>
 
-<%= f.submit "Next" %>
+<div class="d-flex justify-content-center mt-4">
+  <%= f.submit "Next", class: "pokemon-btn" %>
+</div>
 
 <% end %>

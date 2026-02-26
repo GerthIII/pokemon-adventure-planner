@@ -1,20 +1,25 @@
 <div class="container">
-  <h1>Edit Your Team: <%= @team.name %></h1>
+  <h1 class="title">Edit Your Team: <%= @team.name %></h1>
   <%= simple_form_for @team do |f| %>
     <div class="row">
       <% 6.times do |i| %>
-        <% current_member = @team.team_members[i]&.pokemon&.id || "" %>
-        <div class="col-md-4 mb-3">
-          <label class="fw-bold text-light">Slot <%= i + 1 %></label>
-          <%= f.input :pokemon_ids,
-                      collection: @available_pokemon,
-                      label: false,
-                      prompt: "Select a Pokemon",
-                      include_blank: "Leave blank for AI recommendation",
-                      selected: current_member,
-                      input_html: { name: "team[pokemon_ids][]", class: "rounded-pill shadow-sm" } %>
-        </div>
-      <% end %>
+  <% current_member_id = @team.team_members[i]&.pokemon_id %>
+
+  <div class="col-md-4 mb-3">
+    <div class="slot-wrapper">
+      <label class="fw-bold text-dark">Slot <%= i + 1 %></label>
+      <%= f.input :pokemon_ids,
+                  collection: @available_pokemon,
+                  label: false,
+                  prompt: "Select a Pokemon",
+                  selected: current_member_id,
+                  input_html: {
+                    name: "team[pokemon_ids][#{i}]",
+                    class: "rounded-pill shadow-sm"
+                  } %>
+    </div>
+  </div>
+<% end %>
     <%= f.submit "Update Team", class: "btn btn-primary" %>
   <% end %>
     </div>
