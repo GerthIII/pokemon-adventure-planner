@@ -24,7 +24,7 @@
     <!-- CAROUSEL -->
     <h2 class="section-title">Your Adventures</h2>
 
-    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselExample" class="carousel slide">
 
       <div class="carousel-inner">
 
@@ -38,7 +38,7 @@
                 class: "game-image" %>
 
               <h3><%= playthrough.game_version %></h3>
-              <%= link_to "My Teams", playthrough_teams_path(playthrough) %>
+              <%= link_to "My Teams", playthrough_teams_path(playthrough)%>
 
               <% if playthrough.teams&.any? %>
                 <p>Team: <%= playthrough.teams.last.name %></p>
@@ -55,13 +55,14 @@
       </div>
 
       <!-- controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
+    <!-- controls -->
+<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+  <span class="arrow-btn">‹</span>
+</button>
 
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
+<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+  <span class="arrow-btn">›</span>
+</button>
 
     </div>
 

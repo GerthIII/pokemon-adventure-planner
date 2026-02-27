@@ -1,160 +1,106 @@
-// Specific CSS for your home-page
+/* 背景 */
 body {
-  background-color: #d9d9d9;
+  background: #ffcb05;
   font-family: 'Press Start 2P', cursive;
 }
 
+/* 全体中央 */
 .home-container {
   text-align: center;
   padding-top: 60px;
 }
 
+/* タイトル */
 .app-title {
-  font-size: 48px;
+  font-size: 52px;
   margin-bottom: 20px;
 }
 
+/* 説明 */
 .app-description {
-  max-width: 700px;
-  margin: 0 auto 30px;
+  max-width: 650px;
+  margin: 0 auto 25px;
   line-height: 1.6;
-  font-size: 14px;
 }
 
+/* ボール */
 .pokeball-img {
   width: 60px;
-  margin: 20px 0;
+  margin: 20px auto;
+  display: block;
 }
 
+/* STARTボタン（白にする） */
 .start-button {
   display: inline-block;
-  background: #cfcfcf;
-  padding: 20px 60px;
-  border: 2px solid #888;
+  background: white;
+  padding: 22px 70px;
+  border: 3px solid black;
   text-decoration: none;
   color: black;
   font-size: 18px;
-  margin: 30px 0;
-  box-shadow: 0 4px 0 #999;
 }
 
-.cards-container {
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-  margin-top: 40px;
-}
-
-.game-image {
-  width: 180px;
-}
-
-.card-title {
-  margin-top: 10px;
-  font-size: 16px;
-}
-
-* {
-  box-sizing: border-box;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  display: grid;
-  place-items: center;
-  min-height: 100vh;
-  background: #ffcb05;
-}
-.pokeball {
-  display: block;
-  width: 192px;
-  height: 192px;
-  background: radial-gradient(
-      white 16px,
-      black 17px 18px,
-      white 19px 24px,
-      black 25px 32px,
-      transparent 33px
-    ),
-    linear-gradient(to bottom, red 0 80px, black 81px 96px, white 97px 100%);
-  border-radius: 50%;
-  border: 8px solid black;
-  box-shadow: inset -16px -8px 0 0 rgba(0, 0, 0, 0.2);
-  animation: fall 0.5s ease-in-out 1s,
-    shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 1.5s 3,
-    catch 0.5s ease-out 5.25s forwards;
-}
-
-/* Animation */
-@keyframes shake {
-  0% {
-    transform: translateX(0) rotate(0);
-  }
-  20% {
-    transform: translateX(-10px) rotate(-20deg);
-  }
-  30% {
-    transform: translateX(10px) rotate(20deg);
-  }
-  50% {
-    transform: translateX(-10px) rotate(-10deg);
-  }
-  60% {
-    transform: translateX(10px) rotate(10deg);
-  }
-  100% {
-    transform: translateX(0) rotate(0);
-  }
-}
-@keyframes fall {
-  0% {
-    transform: translateY(-200%);
-  }
-  60% {
-    transform: translateY(0);
-  }
-  80% {
-    transform: translateY(-10%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-@keyframes catch {
-  to {
-    filter: saturate(0.8) brightness(0.8);
-  }
-}
-
-h1.title {
-  background-color: #1a1a1a;
-  color: #FFEA00;
-  padding: 20px;
-  text-align: center;
-  font-family: 'Helvetica Neue', sans-serif;
-  letter-spacing: 2px;
-  border-left: 5px solid #FFEA00;
-  border-radius: 10px;
-}
-p.context{
-  background-color: #1a1a1a;
-  color: #FFEA00;
+/* カルーセルカード */
+.playthrough-card {
+  background: white;
+  border: 3px solid black;
   padding: 15px;
-  text-align: center;
-  font-family: 'Helvetica Neue', sans-serif;
-  letter-spacing: 2px;
-  border-left: 5px solid #FFEA00;
-  border-radius: 10px;
-  font-size: medium;
+  width: 200px;
+  margin: auto;
 }
-.psy-gif {
+
+/* My Teams文字を赤 */
+.playthrough-card a {
+  color: red;
+  font-weight: bold;
+  text-decoration: none;
+  width: 220px;
+}
+
+/* 矢印を赤 */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(15%) sepia(100%) saturate(6000%) hue-rotate(350deg);
+}
+
+.arrow-btn {
+  font-size: 40px;
+  font-weight: bold;
+  color: red;
+}
+
+.cards-row {
   display: flex;
-  align-items: center;
   gap: 30px;
-  padding: 40px;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
-.speech-bubble {
-  opacity: 0;
-  transition: opacity 0.3s;
+
+.carousel-item {
+  text-align: center;
+}
+
+.section-title {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.start-button:hover {
+  background: black;
+  color: white;
+  border: 3px solid black;
+  transform: translateY(-2px);
+  transition: 0.2s;
+}
+
+.playthrough-card {
+  transition: 0.2s;
+}
+
+.playthrough-card:hover {
+  background: black;
+  color: white;
+  border: 3px solid black;
+  transform: translateY(-2px);
 }
