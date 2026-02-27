@@ -8,8 +8,9 @@
 @import "components/index";
 @import "pages/index";
 
+
+
 body {
-  font-family: 'Press Start 2P', cursive;
   background-color: $yellow;
   font-family: Arial, sans-serif;
 }
@@ -20,10 +21,11 @@ body {
   color: #FFEA00;
   padding: 10px;
   text-align: center;
-  font-family: 'Helvetica Neue', sans-serif;
   letter-spacing: 20px;
   border-left: 5px solid #FFEA00;
   border-radius: 10px;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .app-description {

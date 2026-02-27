@@ -23,7 +23,6 @@ class Playthrough < ApplicationRecord
     "black",
     "white",
     "black-2",
-    "white",
     "white-2",
     "x",
     "y",
