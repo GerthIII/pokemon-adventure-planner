@@ -1,30 +1,25 @@
-<h1>Choose a game</h1>
+<h1 class= "choose-card">Choose a game</h1>
 
-<%= form_with model: @playthrough do |f| %>
+<%= image_tag "https://www.pokemon.co.jp/ex/VCAMAP/game/images/ss_12.jpg", alt: "ポケモンバージョン", class: "poke-logo" %>
 
-<div class="cards">
+<div class="container py-5">
+  <h2 class="fw-bold mb-4">Select Your Version</h2>
 
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png">
-    <p>Bulbasaur</p>
+  <h1 class="title">Build Your Team</h1>
+  <%= simple_form_for @playthrough do |f| %>
+  <div class="version-cards">
+    <% Playthrough::GAME_VERSIONS.each do |version| %>
+      <%= f.button :button, name: "playthrough[game_version]", value: version, class: "card-version" do %>
+      <label for="<%= version %>" class="card-version">
+        <input id="<%= version %>" type=radio name=playthrough[game_version] class="d-none" value="<%= version %>" />
+        <%= image_tag version, alt: "pokemon #{version} cover", class: "game-cover" %>
+      </label>
+     <% end %>
+    <% end %>
   </div>
-
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png">
-    <p>Charmander</p>
-  </div>
+  <br>
+<div class="d-flex justify-content-center mt-4">
 
 </div>
-
-<br>
-
-<%= f.label :game_version %>
-
-<%= f.select :game_version,
-      Playthrough::GAME_VERSIONS.map { |v| [v.titleize, v] } %>
-
-<br><br>
-
-<%= f.submit "Next" %>
-
 <% end %>
+</div>

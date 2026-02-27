@@ -1,44 +1,45 @@
 class MessagesController < ApplicationController
+  def system_prompt(game_version)
+    <<~PROMPT
+    You are a Pokémon team-building expert specialized in #{game_version}.
+    Build the best possible in-game team following all constraints below.
 
-SYSTEM_PROMPT = <<~PROMPT
-You are a Pokémon team-building expert specialized in Pokémon FireRed/LeafGreen.
-Build the best possible in-game team following all constraints below.
+    IMPORTANT OUTPUT RULES:
+    - Return ONLY valid JSON
+    - Do NOT include explanations, markdown, headings, or extra text
+    - The response must be directly parseable by JSON.parse
 
-IMPORTANT OUTPUT RULES:
-- Return ONLY valid JSON
-- Do NOT include explanations, markdown, headings, or extra text
-- The response must be directly parseable by JSON.parse
-
-OUTPUT FORMAT:
-{
-  "team": [
+    OUTPUT FORMAT:
     {
-      "pokemon_name": STRING,
-      "ability": STRING,
-      "nature": STRING,
-      "held_item": STRING,
-      "move_1": STRING,
-      "move_2": STRING,
-      "move_3": STRING,
-      "move_4": STRING,
-      "progression_strategy": STRING
+      "team": [
+        {
+          "pokemon_name": STRING,
+          "ability": STRING,
+          "nature": STRING,
+          "held_item": STRING,
+          "move_1": STRING,
+          "move_2": STRING,
+          "move_3": STRING,
+          "move_4": STRING,
+          "progression_strategy": STRING
+          "walkthrough": STRING (Here you can explain a complete step by step guide until you get the Pokemons to the Team. You can even tell placeholder Pokemons until you dont get the final member of the team)
+        }
+      ]
     }
-  ]
-}
 
-CONSTRAINTS:
-- Starter must be Charmander
-- If in the text of the following parenthesis (mewtwo) it must be included unless it is out of the constraints scope
-- Only Pokemons from FireRed and LeafGreen games
-- If you are not sure if the Pokemon is within the scope, stick with the 151 first generation Pokemons.
-- Only one starter Pokémon
-- No trade-evolution Pokémon
-- No post-game Pokémon
-- Normal playthrough assumptions
-- Prefer easy-to-obtain Pokémon and reliable moves
-- If a main team Pokémon uses an HM, explain briefly in progression_strategy why it is acceptable
--The team must contain exactly 6 Pokémon.
-PROMPT
+    CONSTRAINTS:
+    - If in the text of the following parenthesis (mewtwo) it must be included unless it is out of the constraints scope
+    - Only Pokemons from #{game_version} game
+    - If you are not sure if the Pokemon is within the scope, stick with the 151 first generation Pokemons.
+    - NEVER create a team with more than one starter of the #{game_version} game.
+    - No trade-evolution Pokémon
+    - No post-game Pokémon
+    - Normal playthrough assumptions
+    - Prefer easy-to-obtain Pokémon and reliable moves
+    - If a main team Pokémon uses an HM, explain briefly in progression_strategy why it is acceptable
+    - The team must contain exactly 6 Pokémon.
+    PROMPT
+  end
 
   def create
     @team = Team.find(params[:team_id])
@@ -47,8 +48,26 @@ PROMPT
     @message.role = "user"
 
     if @message.save
+        team_context = params.dig(:message, :team_context)
+        selected_ids = []
+
+    if team_context.present?
+      parsed = begin
+        JSON.parse(team_context)
+      rescue JSON::ParserError
+       {}
+      end
+      selected_ids = (parsed["pokemon_ids"] || []).reject(&:blank?).map(&:to_i)
+    end
+
+    selected_names = Pokemon.where(id: selected_ids).pluck(:name)
+    puts selected_names
+    user_prompt = <<~USER
+      The following Pokemons #{selected_names.join(", ")} are mandatory in the lits. Create a list that contains these Pokemons.
+      USER
+
       ruby_llm = RubyLLM.chat
-      ruby_llm.with_instructions(SYSTEM_PROMPT)
+      ruby_llm.with_instructions("#{system_prompt(@team.playthrough.game_version)}\n#{user_prompt}")
       @response = ruby_llm.ask(@message.content)
       assistant_message = Message.create(role: 'assistant', team: @team, content: @response.content)
 
@@ -67,7 +86,9 @@ PROMPT
         move_1: pokemon["move_1"],
         move_2: pokemon["move_2"],
         move_3: pokemon["move_3"],
-        move_4: pokemon["move_4"]
+        move_4: pokemon["move_4"],
+        progression_strategy: pokemon["progression_strategy"],
+        walkthrough: pokemon["walkthrough"]
       )
 
     end
@@ -82,6 +103,6 @@ PROMPT
   private
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :role)
   end
 end

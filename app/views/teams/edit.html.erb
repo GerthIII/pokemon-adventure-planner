@@ -1,33 +1,42 @@
-<div class="container">
-  <h1>Edit Your Team: <%= @team.name %></h1>
-  <%= simple_form_for @team do |f| %>
-    <div class="row">
-      <% 6.times do |i| %>
-        <% current_member = @team.team_members[i]&.pokemon&.id || "" %>
-        <div class="col-md-4 mb-3">
-          <label class="fw-bold text-light">Slot <%= i + 1 %></label>
-          <%= f.input :pokemon_ids,
-                      collection: @available_pokemon,
-                      label: false,
-                      prompt: "Select a Pokemon",
-                      include_blank: "Leave blank for AI recommendation",
-                      selected: current_member,
-                      input_html: { name: "team[pokemon_ids][]", class: "rounded-pill shadow-sm" } %>
-        </div>
-      <% end %>
-    <%= f.submit "Update Team", class: "btn btn-primary" %>
-  <% end %>
+<div class="container" data-controller="get-pokemon">
+  <h1 class="title">Edit Your Team: <%= @team.name %></h1>
+  <div>
+    <%= simple_form_for @team do |f| %>
+      <div class="row">
+        <% 6.times do |i| %>
+          <% current_member_id = @team.team_members[i]&.pokemon&.id || "" %>
+          <div class="col-md-4 mb-3">
+            <label class="fw-bold text-light">Slot <%= i + 1 %></label>
+            <%= select_tag "team[pokemon_ids][]",
+                options_from_collection_for_select(@available_pokemon, :id, :name, current_member_id),
+                        include_blank: "Leave blank for AI recommendation",
+                        class: "rounded-pill shadow-sm",
+                        data: {
+                          get_pokemon_target: "slot",
+                          slot_index: i,
+                          action: "change->get-pokemon#capture"
+                        } %>
+          </div>
+        <% end %>
+      <%= f.submit "Update Team", class: "btn btn-primary" %>
+    <% end %>
     </div>
+  </div>
     <div class="container mt-4">
     <%# Use fields_for to target the Message model %>
       <%= simple_form_for [@team, Message.new] do |m| %>
         <%= m.input :content,
               as: :text,
               label: "Ask the AI for Advice",
-              placeholder: "e.g. Can I get a Scizor before the Elite Four?" %>
-          <%= m.hidden_field :role, value: "user" %>
-        <%= m.submit "Ask AI", class: "btn btn-primary" %>
+              placeholder: "e.g. Create a Fire Type Team",
+              input_html: { data: { team_builder_target: "question" } } %>
+
+           <%= m.hidden_field :role, value: "user" %>
+           <%= hidden_field_tag "message[team_context]",
+        "",
+        data: { get_pokemon_target: "teamContext" } %>
+        <%= m.submit "Build a Team For Me", class: "btn btn-primary", data: { action: "click->get-pokemon#inject" } %>
       <% end %>
+      <%= link_to "Back", playthrough_teams_path(@playthrough), class: "btn btn-primary my-5 w-100" %>
       </div>
-      <%= link_to "My Teams", playthrough_teams_path(@playthrough) %>
 </div>

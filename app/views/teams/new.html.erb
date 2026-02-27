@@ -1,28 +1,16 @@
-<h1>Build Your Team</h1>
 
-
-<div class="cards">
-
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png">
-    <p>Bulbasaur</p>
-  </div>
-
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png">
-    <p>Charmander</p>
-  </div>
-
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png">
-    <p>Squirtle</p>
-  </div>
-
-</div>
-
-<br>
-
+<h1 class="title my-2">Build Your Team</h1>
 <%= simple_form_for [@playthrough, @team] do |f| %>
+  <div class="cards">
+    <% @playthrough.get_starters.each do |starter| %>
+      <label for="<%= starter.name %>" class="card">
+        <input id="<%= starter.name %>" type=radio name=team[pokemon_ids][] class="d-none" value="<%= starter.id %>" />
+        <%= image_tag starter.image_url, alt: starter.name %>
+        <p><%= starter.name.capitalize %></p>
+      </label>
+    <% end %>
+  </div>
+  <br>
   <%= f.input :name %>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

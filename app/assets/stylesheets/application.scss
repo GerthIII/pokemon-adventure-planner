@@ -10,4 +10,103 @@
 
 body {
   font-family: 'Press Start 2P', cursive;
+  background-color: $yellow;
+  font-family: Arial, sans-serif;
+}
+
+
+.app-title {
+  background-color: #1a1a1a;
+  color: #FFEA00;
+  padding: 10px;
+  text-align: center;
+  font-family: 'Helvetica Neue', sans-serif;
+  letter-spacing: 20px;
+  border-left: 5px solid #FFEA00;
+  border-radius: 10px;
+}
+
+.app-description {
+  max-width: 650px;
+  margin: 0 auto 25px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.pokeball-img {
+  width: 55px;
+  margin: 15px 0 25px;
+}
+
+.home-container {
+  text-align: center;
+  padding-top: 60px;
+  border-radius: 10px;
+}
+
+/* ポケボール中央 */
+.pokeball-img {
+  display: block;
+  margin: 20px auto;   // ← 中央にする
+  width: 60px;
+}
+
+/* STARTボタン */
+.start-button {
+  display: inline-block;
+  background: #cfcfcf;
+  padding: 25px 80px;
+  border: 2px solid #888;
+  text-decoration: none;
+  color: black;
+  font-size: 22px;
+  margin-top: 10px;
+  border-radius: 10px;
+  &:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.1);
+  }
+}
+
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  border-radius: 10px;
+}
+
+.game-image {
+  width: 180px;
+}
+
+.card-title {
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin: 40px 0;
+}
+
+.card img {
+  width: 140px;
+}
+
+.card {
+  text-align: center;
+}
+.choose-card {
+  background-color: #1a1a1a;
+  color: #FFEA00;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Helvetica Neue', sans-serif;
+  letter-spacing: 2px;
+  border-left: 5px solid #FFEA00;
+  border-radius: 10px;
 }

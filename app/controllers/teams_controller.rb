@@ -7,6 +7,7 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    @playthrough = @team.playthrough
   end
 
   def new
@@ -51,6 +52,6 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, pokemon_ids: [], messages_attributes: %i[content role])
+    params.require(:team).permit(:name, pokemon_ids: [], messages_attributes: [:content, :role])
   end
 end
