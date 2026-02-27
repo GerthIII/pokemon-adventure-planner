@@ -28,14 +28,14 @@
         <%= m.input :content,
               as: :text,
               label: "Ask the AI for Advice",
-              placeholder: "e.g. Can I get a Scizor before the Elite Four?",
+              placeholder: "e.g. Create a Fire Type Team",
               input_html: { data: { team_builder_target: "question" } } %>
 
            <%= m.hidden_field :role, value: "user" %>
            <%= hidden_field_tag "message[team_context]",
         "",
         data: { get_pokemon_target: "teamContext" } %>
-        <%= m.submit "Ask AI", class: "btn btn-primary", data: { action: "click->get-pokemon#inject" } %>
+        <%= m.submit "Build a Team For Me", class: "btn btn-primary", data: { action: "click->get-pokemon#inject" } %>
       <% end %>
       <%= link_to "Back", playthrough_teams_path(@playthrough), class: "btn btn-primary my-5 w-100" %>
       </div>
