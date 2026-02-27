@@ -1,0 +1,9 @@
+.team-btn {
+  width: 260px;        /* same width for all */
+  height: 48px;        /* same height */
+  font-size: 14px;     /* prevents oversized text */
+  padding: 0;          /* height controls size */
+  border-radius: 999px; /* pill look */
+  display: block;
+  margin: 16px auto;   /* center horizontally */
+}
