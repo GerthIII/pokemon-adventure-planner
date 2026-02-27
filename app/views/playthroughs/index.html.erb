@@ -28,31 +28,23 @@
 
       <div class="carousel-inner">
 
-        <% @playthroughs.each_with_index do |playthrough, index| %>
+        <% @playthroughs.each_slice(3).with_index do |three_playthroughs, index| %>
 
           <div class="carousel-item <%= 'active' if index == 0 %>">
+            <div class="row">
+              <% three_playthroughs.each do |playthrough| %>
+                <div class="playthrough-card text-center">
+                  <%= image_tag "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+                    class: "game-image" %>
 
-            <div class="playthrough-card text-center">
-
-              <%= image_tag "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
-                class: "game-image" %>
-
-              <h3><%= playthrough.game_version %></h3>
-              <%= link_to "My Teams", playthrough_teams_path(playthrough)%>
-
-              <% if playthrough.teams&.any? %>
-                <p>Team: <%= playthrough.teams.last.name %></p>
-              <% else %>
-                <p>No team yet</p>
+                  <h3><%= playthrough.game_version %></h3>
+                  <%= link_to "My Teams", playthrough_teams_path(playthrough)%>
+                </div>
               <% end %>
-
-            </div>
-
           </div>
-
+      </div>
         <% end %>
 
-      </div>
 
       <!-- controls -->
     <!-- controls -->
@@ -64,8 +56,8 @@
   <span class="arrow-btn">›</span>
 </button>
 
+  <% end %>
     </div>
 
-  <% end %>
 
 </div>
