@@ -44,7 +44,7 @@ class Playthrough < ApplicationRecord
     when "blue", "green", "red", "firered", "leafgreen"
       Pokemon.where(name: ["charmander", "bulbasaur", "squirtle"], game_version: game_version)
     when "gold", "silver", "crystal", "heartgold", "soulsilver"
-      Pokemon.where(name: ["cyndaquil", "totodile", "chiqorita"], game_version: game_version)
+      Pokemon.where(name: ["cyndaquil", "totodile", "chikorita"], game_version: game_version)
     when "sapphire", "emerald", "ruby", "omega-ruby", "alpha-sapphire"
       Pokemon.where(name: ["mudkip", "treecko", "torchic"], game_version: game_version)
     when "pearl", "diamond", "shining-pearl", "brilliant-diamond"
