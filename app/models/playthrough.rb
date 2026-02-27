@@ -21,8 +21,6 @@ class Playthrough < ApplicationRecord
     "soulsilver",
     "black",
     "white",
-    "colosseum",
-    "xd",
     "black-2",
     "white-2",
     "x",
@@ -42,9 +40,6 @@ class Playthrough < ApplicationRecord
     "legends-arceus",
     "scarlet",
     "violet",
-    "red-japan",
-    "green-japan",
-    "blue-japan",
     "legends-za"
   ]
 
