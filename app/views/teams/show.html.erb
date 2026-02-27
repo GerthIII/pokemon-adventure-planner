@@ -44,8 +44,9 @@
           <h2>Game Progression</h2>
           <hr>
           <% @team.team_members.each do |member| %>
-            <h3 class="mb-1"><strong><%= member.pokemon.name.capitalize %></strong></h3>
-          <% end %>
+          <h3 class="mb-1"><strong><%= member.pokemon.name.capitalize %></strong></h3>
+          <p class="mb-3"><%= member.walkthrough %></p>
+        <% end %>
         </div>
       </div>
       <!-- RIGHT -->

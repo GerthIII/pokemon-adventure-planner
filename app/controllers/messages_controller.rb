@@ -8,6 +8,8 @@ class MessagesController < ApplicationController
     - Return ONLY valid JSON
     - Do NOT include explanations, markdown, headings, or extra text
     - The response must be directly parseable by JSON.parse
+    - The "walkthrough" must be a complete step by step guide until you get all the Pokemons of the Team. Make it formated as Mark Down Text
+
 
     OUTPUT FORMAT:
     {
@@ -21,7 +23,8 @@ class MessagesController < ApplicationController
           "move_2": STRING,
           "move_3": STRING,
           "move_4": STRING,
-          "progression_strategy": STRING
+          "progression_strategy": STRING,
+          "walkthrough": STRING (Here you can explain a complete step by step guide until you get the Pokemons to the Team. You can even tell placeholder Pokemons until you dont get the final member of the team)
         }
       ]
     }
@@ -29,6 +32,7 @@ class MessagesController < ApplicationController
     CONSTRAINTS:
     - If in the text of the following parenthesis (mewtwo) it must be included unless it is out of the constraints scope
     - Only Pokemons from #{game_version} game
+    - Never return special characters like ♀ or ♂
     - If you are not sure if the Pokemon is within the scope, stick with the 151 first generation Pokemons.
     - NEVER create a team with more than one starter of the #{game_version} game.
     - No trade-evolution Pokémon
@@ -87,6 +91,7 @@ class MessagesController < ApplicationController
         move_3: pokemon["move_3"],
         move_4: pokemon["move_4"],
         progression_strategy: pokemon["progression_strategy"],
+        walkthrough: pokemon["walkthrough"]
       )
 
     end
