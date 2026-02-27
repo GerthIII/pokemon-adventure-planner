@@ -1,0 +1,80 @@
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 縦中央 */
+  align-items: center;
+  text-align: center;
+}
+
+/* 少し上にずらす */
+.app-title {
+  margin-top: -120px;
+}
+
+.start-button {
+  margin-top: 20px;
+  padding: 20px 60px;
+  border: 2px solid #ffffff;
+  background: white;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.cards-container {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.playthrough-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  width: 320px;
+  margin: auto;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+
+.playthrough-card img {
+  width: 140px;
+}
+
+.cards {
+  display: flex;
+  gap: 40px;
+}
+
+.card img {
+  width: 120px;
+}
+
+.carousel {
+  border: 2px solid black;
+}
+
+.carousel .carousel-arrow {
+  color: black;
+  border: 2px solid black;
+  border-radius: 50%;
+  padding: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(17%) sepia(91%) saturate(7486%) hue-rotate(357deg) brightness(101%) contrast(112%);
+}
+
+.my-teams-link {
+  color: red;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.my-teams-link:hover {
+  color: darkred;
+}

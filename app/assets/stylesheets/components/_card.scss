@@ -1,12 +1,29 @@
 .cards {
   display: flex;
   gap: 40px;
+  background-color: yellow;
 }
 
 .card img {
   width: 120px;
 }
 
+.carousel {
+  border: 2px solid black;
+}
+
+.carousel .carousel-arrow {
+  color: black;
+  border: 2px solid black;
+  border-radius: 50%;
+  padding: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
 .version-cards {
   display: flex;
   gap: 24px;

@@ -1,0 +1,106 @@
+/* 背景 */
+body {
+  background: #ffcb05;
+  font-family: 'Press Start 2P', cursive;
+}
+
+/* 全体中央 */
+.home-container {
+  text-align: center;
+  padding-top: 60px;
+}
+
+/* タイトル */
+.app-title {
+  font-size: 52px;
+  margin-bottom: 20px;
+}
+
+/* 説明 */
+.app-description {
+  max-width: 650px;
+  margin: 0 auto 25px;
+  line-height: 1.6;
+}
+
+/* ボール */
+.pokeball-img {
+  width: 60px;
+  margin: 20px auto;
+  display: block;
+}
+
+/* STARTボタン（白にする） */
+.start-button {
+  display: inline-block;
+  background: white;
+  padding: 22px 70px;
+  border: 3px solid black;
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
+/* カルーセルカード */
+.playthrough-card {
+  background: white;
+  border: 3px solid black;
+  padding: 15px;
+  width: 200px;
+  margin: auto;
+}
+
+/* My Teams文字を赤 */
+.playthrough-card a {
+  color: red;
+  font-weight: bold;
+  text-decoration: none;
+  width: 220px;
+}
+
+/* 矢印を赤 */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(15%) sepia(100%) saturate(6000%) hue-rotate(350deg);
+}
+
+.arrow-btn {
+  font-size: 40px;
+  font-weight: bold;
+  color: red;
+}
+
+.cards-row {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.carousel-item {
+  text-align: center;
+}
+
+.section-title {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.start-button:hover {
+  background: black;
+  color: white;
+  border: 3px solid black;
+  transform: translateY(-2px);
+  transition: 0.2s;
+}
+
+.playthrough-card {
+  transition: 0.2s;
+}
+
+.playthrough-card:hover {
+  background: black;
+  color: white;
+  border: 3px solid black;
+  transform: translateY(-2px);
+}
