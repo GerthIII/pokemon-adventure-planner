@@ -1,43 +1,45 @@
 class MessagesController < ApplicationController
+  def system_prompt(game_version)
+    <<~PROMPT
+    You are a Pokémon team-building expert specialized in #{game_version}.
+    Build the best possible in-game team following all constraints below.
 
-SYSTEM_PROMPT = <<~PROMPT
-You are a Pokémon team-building expert specialized in Pokémon FireRed/LeafGreen.
-Build the best possible in-game team following all constraints below.
+    IMPORTANT OUTPUT RULES:
+    - Return ONLY valid JSON
+    - Do NOT include explanations, markdown, headings, or extra text
+    - The response must be directly parseable by JSON.parse
 
-IMPORTANT OUTPUT RULES:
-- Return ONLY valid JSON
-- Do NOT include explanations, markdown, headings, or extra text
-- The response must be directly parseable by JSON.parse
-
-OUTPUT FORMAT:
-{
-  "team": [
+    OUTPUT FORMAT:
     {
-      "pokemon_name": STRING,
-      "ability": STRING,
-      "nature": STRING,
-      "held_item": STRING,
-      "move_1": STRING,
-      "move_2": STRING,
-      "move_3": STRING,
-      "move_4": STRING,
-      "progression_strategy": STRING
+      "team": [
+        {
+          "pokemon_name": STRING,
+          "ability": STRING,
+          "nature": STRING,
+          "held_item": STRING,
+          "move_1": STRING,
+          "move_2": STRING,
+          "move_3": STRING,
+          "move_4": STRING,
+          "progression_strategy": STRING
+          "walkthrough": STRING (Here you can explain a complete step by step guide until you get the Pokemons to the Team. You can even tell placeholder Pokemons until you dont get the final member of the team)
+        }
+      ]
     }
-  ]
-}
 
-CONSTRAINTS:
-- If in the text of the following parenthesis (mewtwo) it must be included unless it is out of the constraints scope
-- Only Pokemons from FireRed and LeafGreen games
-- If you are not sure if the Pokemon is within the scope, stick with the 151 first generation Pokemons.
-- Only one starter Pokémon
-- No trade-evolution Pokémon
-- No post-game Pokémon
-- Normal playthrough assumptions
-- Prefer easy-to-obtain Pokémon and reliable moves
-- If a main team Pokémon uses an HM, explain briefly in progression_strategy why it is acceptable
--The team must contain exactly 6 Pokémon.
-PROMPT
+    CONSTRAINTS:
+    - If in the text of the following parenthesis (mewtwo) it must be included unless it is out of the constraints scope
+    - Only Pokemons from #{game_version} game
+    - If you are not sure if the Pokemon is within the scope, stick with the 151 first generation Pokemons.
+    - NEVER create a team with more than one starter of the #{game_version} game.
+    - No trade-evolution Pokémon
+    - No post-game Pokémon
+    - Normal playthrough assumptions
+    - Prefer easy-to-obtain Pokémon and reliable moves
+    - If a main team Pokémon uses an HM, explain briefly in progression_strategy why it is acceptable
+    - The team must contain exactly 6 Pokémon.
+    PROMPT
+  end
 
   def create
     @team = Team.find(params[:team_id])
@@ -65,7 +67,7 @@ PROMPT
       USER
 
       ruby_llm = RubyLLM.chat
-      ruby_llm.with_instructions("#{SYSTEM_PROMPT}\n#{user_prompt}")
+      ruby_llm.with_instructions("#{system_prompt(@team.playthrough.game_version)}\n#{user_prompt}")
       @response = ruby_llm.ask(@message.content)
       assistant_message = Message.create(role: 'assistant', team: @team, content: @response.content)
 
@@ -84,7 +86,9 @@ PROMPT
         move_1: pokemon["move_1"],
         move_2: pokemon["move_2"],
         move_3: pokemon["move_3"],
-        move_4: pokemon["move_4"]
+        move_4: pokemon["move_4"],
+        progression_strategy: pokemon["progression_strategy"],
+        walkthrough: pokemon["walkthrough"]
       )
 
     end
