@@ -22,7 +22,6 @@ class MessagesController < ApplicationController
           "move_3": STRING,
           "move_4": STRING,
           "progression_strategy": STRING
-          "walkthrough": STRING (Here you can explain a complete step by step guide until you get the Pokemons to the Team. You can even tell placeholder Pokemons until you dont get the final member of the team)
         }
       ]
     }
