@@ -7,6 +7,7 @@
 
   <h1 class="title">Build Your Team</h1>
   <%= simple_form_for @playthrough do |f| %>
+  <%= f.submit "Next", class: "pokemon-btn" %>
   <div class="version-cards">
     <% Playthrough::GAME_VERSIONS.each do |version| %>
       <label for="<%= version %>" class="card-version">
