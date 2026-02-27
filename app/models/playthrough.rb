@@ -12,7 +12,7 @@ class Playthrough < ApplicationRecord
     "gold",
     "silver",
     "crystal",
-    "hearthgold",
+    "heartgold",
     "soulsilver",
     "sapphire",
     "emerald",
