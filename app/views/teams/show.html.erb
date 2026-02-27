@@ -3,8 +3,8 @@
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <% @team.team_members.each do |member| %>
       <div class="col">
-        <div class="card shadow-sm">
-          <%= image_tag member.pokemon.image_url, class: "card-img-top", alt: member.pokemon.name %>
+        <div class="card shadow-sm justify-content-center">
+          <%= image_tag member.pokemon.image_url, class: "card-img-top mx-auto d-block", alt: member.pokemon.name %>
 
           <div class="card-body text-center">
             <h2 class="card-title fw-bold mb-2">
@@ -21,10 +21,10 @@
 
             <h5 class="fw-semibold mb-2">Move Set</h5>
             <ul class="list-unstyled text-start small mb-0">
-              <li>• <%= member.move_1 %></li>
-              <li>• <%= member.move_2 %></li>
-              <li>• <%= member.move_3 %></li>
-              <li>• <%= member.move_4 %></li>
+              <li><%= member.move_1 %></li>
+              <li><%= member.move_2 %></li>
+              <li><%= member.move_3 %></li>
+              <li><%= member.move_4 %></li>
             </ul>
 
             <hr>
@@ -38,5 +38,28 @@
     <% end %>
   </div><%# end row %>
 
-  <%= link_to "My Teams", playthrough_teams_path(@playthrough), class: "btn btn-info fw-bold rounded-pill shadow-sm my-3" %>
+  <%= link_to "My Teams", playthrough_teams_path(@playthrough), class: "btn btn-info fw-bold rounded-pill shadow-sm btn-lg my-5" %>
+
+ <div class="container mb-3">
+  <div class="row">
+    <!-- LEFT -->
+    <div class="col-6">
+      <div class="card shadow-sm p-3 d-flex flex-column justify-content-start text-start">
+        <h2>Game Progression</h2>
+        <hr>
+
+        <% @team.team_members.each do |member| %>
+          <h3 class="mb-1"><strong><%= member.pokemon.name.capitalize %></strong></h3>
+          <p class="mb-3"><%= member.walkthrough %></p>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="col-6 d-flex align-items-center justify-content-center">
+      <%= image_tag "pokemongif.gif", class: "img-fluid", alt: "Pokemon gif" %>
+    </div>
+  </div>
+</div>
+
 </div><%# end container %>
