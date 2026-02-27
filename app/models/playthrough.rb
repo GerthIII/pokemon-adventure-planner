@@ -12,7 +12,7 @@ class Playthrough < ApplicationRecord
     "gold",
     "silver",
     "crystal",
-    "hearthgold",
+    "heartgold",
     "soulsilver",
     "sapphire",
     "emerald",
@@ -21,6 +21,7 @@ class Playthrough < ApplicationRecord
     "alpha-sapphire",
     "pearl",
     "black",
+    "white",
     "black-2",
     "white",
     "white-2",
@@ -32,10 +33,7 @@ class Playthrough < ApplicationRecord
     "shield",
     "scarlet",
     "violet",
-    "legends-arceus",
-    "legends-za",
-    "lets-go-pikachu",
-    "lets-go-eevee"
+    "legends-za"
   ]
 
   validates :game_version, presence: true

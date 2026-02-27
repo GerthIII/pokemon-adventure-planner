@@ -7,6 +7,42 @@
   width: 120px;
 }
 
+.version-cards {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  background-color: whitesmoke;
+  scrollbar-color: red transparent;
+  scrollbar-width: thin;
+}
+.card-version {
+  position: relative;
+  width: 200px;
+  filter: grayscale(1) opacity(.5);
+  padding: 10px;
+}
+.game-cover {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  background-color: whitesmoke;
+  border-radius: 8px;
+}
+
+.card-version:has(:hover) {
+  filter: none;
+}
+
+.card-version:has(input:checked) .game-cover {
+  filter: none;
+  transform: translate(-4px, -4px);
+  box-shadow: 4px 4px 0 0;
+}
+
+.version-text {
+  position: absolute;
+}
+
 label.card:has(input:checked) {
   border: 3px solid #0d6efd;
   transform: scale(1.05);

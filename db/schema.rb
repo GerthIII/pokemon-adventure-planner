@@ -51,7 +51,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_26_081547) do
     t.string "move_4"
     t.string "nature"
     t.bigint "pokemon_id", null: false
-    t.string "progression"
     t.string "progression_strategy"
     t.bigint "team_id", null: false
     t.datetime "updated_at", null: false
