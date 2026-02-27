@@ -1,27 +1,19 @@
 <h1 class="title">Build Your Team</h1>
-
-
 <div class="cards">
-
   <div class="card">
     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png">
     <p>Bulbasaur</p>
   </div>
-
   <div class="card">
     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png">
     <p>Charmander</p>
   </div>
-
   <div class="card">
     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png">
     <p>Squirtle</p>
   </div>
-
 </div>
-
 <br>
-
 <%= simple_form_for [@playthrough, @team] do |f| %>
   <%= f.input :name %>
   <%= f.input :pokemon_ids,
