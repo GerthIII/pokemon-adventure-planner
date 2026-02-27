@@ -23,7 +23,7 @@
                 <div class="playthrough-card text-center">
                   <%= image_tag "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
                     class: "game-image" %>
-                  <h3><%= playthrough.game_version %></h3>
+                  <h3 class="fs-6"><%= playthrough.game_version %></h3>
                   <%= link_to "My Teams", playthrough_teams_path(playthrough)%>
                 </div>
               <% end %>
