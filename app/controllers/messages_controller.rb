@@ -88,7 +88,6 @@ class MessagesController < ApplicationController
         move_3: pokemon["move_3"],
         move_4: pokemon["move_4"],
         progression_strategy: pokemon["progression_strategy"],
-        walkthrough: pokemon["walkthrough"]
       )
 
     end

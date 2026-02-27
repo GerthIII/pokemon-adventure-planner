@@ -12,8 +12,11 @@ body {
 
 /* タイトル */
 .app-title {
+  font-family: 'Press Start 2P', cursive;
   font-size: 52px;
+  margin: 0 auto;
   margin-bottom: 20px;
+  width: fit-content;
 }
 
 /* 説明 */
@@ -39,6 +42,7 @@ body {
   text-decoration: none;
   color: black;
   font-size: 18px;
+  font-family: 'Press Start 2P', cursive;
 }
 
 /* カルーセルカード */

@@ -1,15 +1,11 @@
 .cards {
   display: flex;
   gap: 40px;
-  background-color: yellow;
+  background-color: $yellow;
 }
 
 .card img {
   width: 120px;
-}
-
-.carousel {
-  border: 2px solid black;
 }
 
 .carousel .carousel-arrow {
