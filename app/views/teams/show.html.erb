@@ -3,7 +3,7 @@
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <% @team.team_members.each do |member| %>
       <div class="col">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm d-flex justify-content-center align-items-center">
           <%= image_tag member.pokemon.image_url, class: "card-img-top", alt: member.pokemon.name %>
 
           <div class="card-body text-center">
@@ -21,10 +21,10 @@
 
             <h5 class="fw-semibold mb-2">Move Set</h5>
             <ul class="list-unstyled text-start small mb-0">
-              <li>• <%= member.move_1 %></li>
-              <li>• <%= member.move_2 %></li>
-              <li>• <%= member.move_3 %></li>
-              <li>• <%= member.move_4 %></li>
+              <li><%= member.move_1 %></li>
+              <li><%= member.move_2 %></li>
+              <li><%= member.move_3 %></li>
+              <li><%= member.move_4 %></li>
             </ul>
 
             <hr>
