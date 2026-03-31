@@ -1,6 +1,6 @@
 class PlaythroughsController < ApplicationController
   def index
-    @playthroughs = current_user.playthroughs.all
+    @playthroughs = current_user.playthroughs
   end
 
   def show
