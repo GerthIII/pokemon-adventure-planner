@@ -2,7 +2,6 @@ class Playthrough < ApplicationRecord
   belongs_to :user
   has_many :teams, dependent: :destroy
 
-
   GAME_VERSIONS = [
     "blue",
     "green",
@@ -70,5 +69,4 @@ class Playthrough < ApplicationRecord
       []
     end
   end
-
 end
