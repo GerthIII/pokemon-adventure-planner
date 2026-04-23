@@ -47,19 +47,12 @@ body {
 
 /* カルーセルカード */
 .playthrough-card {
+  display: inline-block;
   background: white;
-  border: 3px solid black;
-  padding: 15px;
-  width: 200px;
+  // border: 3px solid black;
+  width: fit-content;
+  line-height: 0;
   margin: auto;
-}
-
-/* My Teams文字を赤 */
-.playthrough-card a {
-  color: red;
-  font-weight: bold;
-  text-decoration: none;
-  width: 220px;
 }
 
 /* 矢印を赤 */
@@ -105,6 +98,14 @@ body {
 .playthrough-card:hover {
   background: black;
   color: white;
-  border: 3px solid black;
+  // border: 3px solid black;
   transform: translateY(-2px);
+}
+
+.adventures-grid {
+  display: inline-grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 20px;
+  max-width: 700px;
+  margin: 0 auto;
 }
